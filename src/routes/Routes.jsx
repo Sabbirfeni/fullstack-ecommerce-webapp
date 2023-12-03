@@ -7,6 +7,7 @@ import ProductCard from "../components/productCard/ProductCard";
 import ProductInfo from "../pages/productInfo/ProductInfo";
 import AddProduct from "../pages/admin/pages/AddProduct";
 import UpdateProduct from "../pages/admin/pages/UpdateProduct";
+import { PrivateRouteForAdmin, PrivateRouteForUser } from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -27,11 +28,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/order',
-                element: <Order/>
+                element: (
+                        <PrivateRouteForUser>
+                            <Order/>
+                        </PrivateRouteForUser>
+                    )
             },
             {
                 path: '/dashboard',
-                element: <Dashboard/>
+                element: (
+                        <PrivateRouteForAdmin>
+                            <Dashboard/>
+                        </PrivateRouteForAdmin>
+                    )
             },
             {
                 path: '/productinfo/:id',
@@ -39,11 +48,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addproduct',
-                element: <AddProduct/>
+                element: (
+                    <PrivateRouteForAdmin>
+                        <AddProduct/>
+                    </PrivateRouteForAdmin>
+                )
             },
             {
                 path: '/updateproduct',
-                element: <UpdateProduct/>
+                element: (
+                    <PrivateRouteForAdmin>
+                        <UpdateProduct/>
+                    </PrivateRouteForAdmin>
+                )
             },
             {
                 path: '/*',
