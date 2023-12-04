@@ -28,7 +28,7 @@ function Signup() {
                 email: response.user.email,
                 time: Timestamp.now()
             }
-            const userRef = collection(fireDB, 'USERS');
+            const userRef = collection(fireDB, 'users');
             await addDoc(userRef, user)
             toast.success('Congrats! You are signed up.')
             setName('');
