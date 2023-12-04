@@ -13,7 +13,13 @@ export default function Navbar() {
   const { toggleMode, mode } = context
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const isAdmin = user ? user.user.email == 'sabbirholybangla@gmail.com' ? true : false : false;
+  // const isAdmin = user ? user.user.email == 'sabbirholybangla@gmail.com' ? true : false : false;
+  const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
+  const logout = () => {
+    localStorage.clear('user');
+    window.location.href = '/login';
+  }
+  
   return (
     <div className="bg-white sticky top-0 z-50  "  >
       {/* Mobile menu */}
@@ -57,11 +63,16 @@ export default function Navbar() {
                   <Link to={'/allproducts'} className="text-sm font-medium text-gray-900 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     All Products
                   </Link>
-                  <div className="flow-root">
-                    <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
-                      Order
-                    </Link>
-                  </div>
+                  {
+                    user && (
+                      <div className="flow-root">
+                        <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
+                          Order
+                        </Link>
+                      </div>
+                    )
+                  }
+                  
 
                   {isAdmin && (
                     <div className="flow-root">
@@ -71,12 +82,16 @@ export default function Navbar() {
                     </div>
                   )}
                   
-
-                  <div className="flow-root">
-                    <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
-                      Logout
-                    </a>
-                  </div>
+                    {
+                      isAdmin && (
+                        <div className="flow-root">
+                          <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                            Logout
+                          </a>
+                        </div>
+                      )
+                    }
+                  
                   <div className="flow-root">
                     <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
                       <img
@@ -139,9 +154,14 @@ export default function Navbar() {
                   <Link to={'/allproducts'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     All Products
                   </Link>
-                  <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    Order
-                  </Link>
+                  {
+                    user && (
+                      <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                        Order
+                      </Link>
+                    )
+                  }
+                
                   {
                     isAdmin && (
                       <Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
@@ -150,10 +170,14 @@ export default function Navbar() {
                     )
                   }
                  
-
-                  <a className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    Logout
-                  </a>
+                  {
+                    isAdmin && (
+                      <a onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                        Logout
+                      </a>
+                    )
+                  }
+                  
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
