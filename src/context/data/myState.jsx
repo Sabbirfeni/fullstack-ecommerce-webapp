@@ -59,7 +59,7 @@ function MyState(props) {
   }
 
   const [ product, setProduct ] = useState([])
-  console.log(product)
+
   const getProductData = async () => {
     setLoading(true);
 
