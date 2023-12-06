@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsFillCloudSunFill } from 'react-icons/bs'
 import { FiSun } from 'react-icons/fi'
 import myContext from '../../context/data/myContext'
@@ -14,12 +14,13 @@ export default function Navbar() {
   const { toggleMode, mode } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const cartItems = useSelector(state => state.cart)
-
+  const navigate = useNavigate()
   // const isAdmin = user ? user.user.email == 'sabbirholybangla@gmail.com' ? true : false : false;
   const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
+
   const logout = () => {
     localStorage.clear('user');
-    window.location.href = '/login';
+    navigate('/login')
   }
   
   return (
@@ -76,7 +77,7 @@ export default function Navbar() {
                   }
                   
 
-                  {isAdmin && (
+                  {isAdmin  && (
                     <div className="flow-root">
                       <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
                         admin
@@ -85,8 +86,8 @@ export default function Navbar() {
                   )}
                   
                     {
-                      isAdmin && (
-                        <div className="flow-root">
+                      isAdmin || user && (
+                        <div onClick={logout} className="flow-root">
                           <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
                             Logout
                           </a>
@@ -173,7 +174,7 @@ export default function Navbar() {
                   }
                  
                   {
-                    isAdmin && (
+                    isAdmin || user && (
                       <a onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
                         Logout
                       </a>

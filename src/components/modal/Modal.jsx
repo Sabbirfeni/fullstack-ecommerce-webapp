@@ -1,24 +1,34 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function Modal() {
+export default function Modal({ orderInfo, handleOnChange, handleOrderSubmit }) {
+    const { fullName, address, cardNo, cardExpDate, code } = orderInfo
+
+    const user = localStorage.getItem('user')
     let [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
 
     function closeModal() {
         setIsOpen(false)
     }
 
     function openModal() {
-        setIsOpen(true)
+        if(user) {
+            setIsOpen(true)
+        } else {
+            navigate('/login')
+        }
+
     }
 
     return (
         <>
-            <div className="  text-center rounded-lg text-white font-bold">
+            <div className=" text-center rounded-lg text-white font-bold">
                 <button
                     type="button"
                     onClick={openModal}
-                    className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold bg-green-600"
+                    className="w-full bg-violet-600 py-2 text-center rounded-lg text-white font-bold bg-green-600"
                 >
                     Buy Now
                 </button>
@@ -59,24 +69,31 @@ export default function Modal() {
 
                                                     <form className="space-y-4 md:space-y-6" action="#">
                                                         <div>
-                                                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Enter Full Name</label>
-                                                            <input  type="name" name="name" id="name" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
+                                                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
+                                                            <input  type="name" name="fullName" value={fullName} onChange={e => handleOnChange(e)} id="name" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
                                                         </div>
                                                         <div>
-                                                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Enter Full Address</label>
-                                                            <input type="text" name="address" id="address" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
+                                                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Full Address</label>
+                                                            <input type="text" name="address" value={address} onChange={e => handleOnChange(e)} id="address" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
                                                         </div>
                                                         <div>
-                                                            <label htmlFor="pincode" className="block mb-2 text-sm font-medium text-gray-900">Enter Pincode</label>
-                                                            <input type="text" name="pincode" id="pincode" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
+                                                            <label htmlFor="pincode" className="block mb-2 text-sm font-medium text-gray-900">Card Number</label>
+                                                            <input type="number" name="cardNo" value={cardNo} onChange={e => handleOnChange(e)} id="pincode" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
                                                         </div>
                                                         <div>
-                                                            <label htmlFor="mobileNumber" className="block mb-2 text-sm font-medium text-gray-900">Enter Mobile Number</label>
-                                                            <input type="text" name="mobileNumber" id="mobileNumber" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
+                                                            <label htmlFor="mobileNumber" className="block mb-2 text-sm font-medium text-gray-900">Card Expire Date</label>
+                                                            <input type="date" name="cardExpDate" value={cardExpDate} onChange={e => handleOnChange(e)} id="mobileNumber" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
+                                                        </div>
+                                                        <div>
+                                                            <label htmlFor="mobileNumber" className="block mb-2 text-sm font-medium text-gray-900">ZIP Code</label>
+                                                            <input type="number" name="code" value={code} onChange={e => handleOnChange(e)} id="mobileNumber" className=" border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-100" required />
                                                         </div>
 
                                                     </form>
-                                                    <button onClick={closeModal} type="button" className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 ">Order Now</button>
+                                                    <button onClick={e => {
+                                                        handleOrderSubmit(e)
+                                                        closeModal()
+                                                    }} type="submit" className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 ">Order Now</button>
                                                 </div>
                                             </div>
                                         </div>
