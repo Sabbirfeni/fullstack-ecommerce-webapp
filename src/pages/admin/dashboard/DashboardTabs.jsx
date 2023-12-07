@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 function DashboardTab() {
     const context = useContext(myContext)
-    const { mode, product, deleteProduct, editHandle } = context
-    console.log(product[0] == undefined)
+    const { mode, product, deleteProduct, editHandle, orders } = context
+    console.log(orders)
     let [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
@@ -150,9 +150,6 @@ function DashboardTab() {
                                             <thead  className="text-xs text-black uppercase bg-gray-200 " style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
                                                 <tr>
                                                     <th scope="col" className="px-6 py-3">
-                                                        Payment Id
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3">
                                                         Image
                                                     </th>
                                                     <th scope="col" className="px-6 py-3">
@@ -171,12 +168,6 @@ function DashboardTab() {
                                                         Address
                                                     </th>
                                                     <th scope="col" className="px-6 py-3">
-                                                        Pincode
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3">
-                                                        Phone Number
-                                                    </th>
-                                                    <th scope="col" className="px-6 py-3">
                                                         Email
                                                     </th>
                                                     <th scope="col" className="px-6 py-3">
@@ -184,47 +175,52 @@ function DashboardTab() {
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                               
-                                                        <tr className="bg-gray-50 border-b  dark:border-gray-700" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                               3393939
-                                                            </td>
-                                                            <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                                                <img className='w-16' src="https://dummyimage.com/720x400" alt="img" />
-                                                            </th>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                Title
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                ₹100
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                pots
-                                                            </td>
-                                                          
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                name
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                india
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                82828
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                               929929929929
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                                kkakka@gmail.com
-                                                            </td>
-                                                            <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                               12 Aug 2019
-                                                            </td>
 
-                                                        </tr>
+                                            {orders.map((order, index) => {
                                                 
-                                            </tbody>
+                                                const { addressInfo, date, email, orderItem } = order
+                                                const { fullName, address } = addressInfo
+                                                return (
+                                                    <tbody key={index}>
+                                                        {orderItem.map((item, index) => {
+                                                            const { title, price, catergory, imageUrl } = item
+                                                            return (
+                                                                <tr key={index} className="bg-gray-50 border-b  dark:border-gray-700" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
+                                                                    
+                                                                    <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                                                        <img className='w-16' src={imageUrl} alt="img" />
+                                                                    </th>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {title}
+                                                                    </td>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        ₹{price}
+                                                                    </td>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {catergory}
+                                                                    </td>
+                                                                
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {fullName}
+                                                                    </td>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {address}
+                                                                    </td>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {email}
+                                                                    </td>
+                                                                    <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                        {date}
+                                                                    </td>
+                                                                </tr>)
+                                                        })}
+                                               
+
+                                            
+                                                    </tbody>
+                                                )
+                                            })}
+
                                         </table>
                                  
                             </div>

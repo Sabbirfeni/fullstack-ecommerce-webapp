@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function Modal({ orderInfo, handleOnChange, handleOrderSubmit }) {
+export default function Modal({ orderInfo, handleOnChange, handleBuy }) {
     const { fullName, address, cardNo, cardExpDate, code } = orderInfo
 
     const user = localStorage.getItem('user')
@@ -63,10 +63,10 @@ export default function Modal({ orderInfo, handleOnChange, handleOrderSubmit }) 
 
                                     <section className="">
                                         <div className="flex flex-col items-center justify-center py-8 mx-auto  lg:py-0">
-                                          
+                                            <h1 className='text-xl font-bold'>FakePay</h1>
                                             <div className="w-full  rounded-lg md:mt-0 sm:max-w-md xl:p-0 ">
                                                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-
+                                                   
                                                     <form className="space-y-4 md:space-y-6" action="#">
                                                         <div>
                                                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
@@ -91,7 +91,7 @@ export default function Modal({ orderInfo, handleOnChange, handleOrderSubmit }) 
 
                                                     </form>
                                                     <button onClick={e => {
-                                                        handleOrderSubmit(e)
+                                                        handleBuy(e)
                                                         closeModal()
                                                     }} type="submit" className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 ">Order Now</button>
                                                 </div>

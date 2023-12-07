@@ -3,7 +3,7 @@ import MyContext from './myContext'
 import { toast } from 'react-toastify';
 import { fireDB } from '../../firebase/FirebaseConfig';
 import { AuthErrorCodes } from 'firebase/auth';
-import { QuerySnapshot, Timestamp, addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
+import { QuerySnapshot, Timestamp, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 function MyState(props) {
@@ -122,12 +122,35 @@ function MyState(props) {
     }
   }
 
+  const [ orders, setOrders ] = useState([]);
+
+  const getOrderData = async () => {
+    setLoading(true)
+    try {
+      const result = await getDocs(collection(fireDB, 'orders'))
+      const orderArray = [];
+      result.forEach(doc => {
+        orderArray.push(doc.data())
+        setLoading(false)
+      })
+      setOrders(orderArray)
+      setLoading(false)
+    } catch(err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     getProductData()
   }, [])
 
+  useEffect(() => {
+    getOrderData()
+  }, [])
+
   return (
-    <MyContext.Provider value={{ mode, toggleMode, loading, setLoading, products, setProducts, addProduct, product, editHandle, updateProduct, deleteProduct }}>
+    <MyContext.Provider value={{ mode, toggleMode, loading, setLoading, products, setProducts, addProduct, product, editHandle, updateProduct, deleteProduct, orders }}>
         {props.children}
     </MyContext.Provider>
   )

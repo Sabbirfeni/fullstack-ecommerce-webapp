@@ -5,6 +5,8 @@ import Modal from '../../components/modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFromCart } from '../../redux/cartSlice';
 import { toast } from 'react-toastify';
+import { addDoc, collection } from 'firebase/firestore';
+import { fireDB } from '../../firebase/FirebaseConfig';
 
 
 function Cart() {
@@ -17,7 +19,7 @@ function Cart() {
 
 
   // All the values of fakepay form (order form)
-  const [ orderInfo, setOrderInfo ] = useState({
+  const [ addressInfo, setAddressInfo ] = useState({
     fullName: '',
     address: '',
     cardNo: '',
@@ -27,22 +29,43 @@ function Cart() {
 
 
   const fakePayOnChange = e => {
-    setOrderInfo(state => ({ ...state, [e.target.name]: e.target.value }))
+    setAddressInfo(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const handleOrderSubmit = e => {
-    const { fullName, address, cardNo, cardExpDate, code } = orderInfo
+  
+
+  const handleBuy = async e => {
+
+    const { fullName, address, cardNo, cardExpDate, code } = addressInfo
     e.preventDefault()
-    if(fullName !== '' && address !== '' && cardNo !== '' && cardExpDate !== '' && code !== '') {
-      const userInfoWithOrder = {
-        userId: user.user.uid,
-        orderInfo,
-        orderItem: cartItem
-      }
-      console.log(userInfoWithOrder)
-    } else {
+
+    if(fullName == '' && address == '' && cardNo == '' && cardExpDate == '' && code == '') {
       toast.warning('Please enter all field')
     }
+
+    const userid = JSON.parse(localStorage.getItem('user')).user.uid
+    const userInfoWithOrder = {
+      orderItem: cartItem,
+      addressInfo,
+      date: new Date().toLocaleString("en-US", {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric'
+      }),
+      email: JSON.parse(localStorage.getItem('user')).user.email,
+      userid,
+      paymentId: userid.slice(0, 8)
+    }
+
+    try {
+      const docRef = collection(fireDB, 'orders')
+      await addDoc(docRef, userInfoWithOrder)
+      toast.success('Order successfully completed!')
+    } catch(err) {
+      console.log(err)
+    }
+
+
 
   }
 
@@ -115,7 +138,7 @@ function Cart() {
                     </div>
                   </div>
                   {/* <Modal  /> */}
-                  <Modal orderInfo={orderInfo} handleOnChange={fakePayOnChange} handleOrderSubmit={handleOrderSubmit} />
+                  <Modal orderInfo={addressInfo} handleOnChange={fakePayOnChange} handleBuy={handleBuy} />
                 </div>
     
               </div> 
