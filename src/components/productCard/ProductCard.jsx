@@ -2,10 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import myContext from '../../context/data/myContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
+import { Link } from 'react-router-dom'
 
 function ProductCard() {
     const context = useContext(myContext)
-    const { mode, product } = context
+    const { mode, product, searchKey, filterType, filterPrice, } = context
+ 
     const cartItem = useSelector(state => state.cart)
     const dispatch = useDispatch();
 
@@ -25,10 +27,15 @@ function ProductCard() {
                 </div>
 
                 <div className="flex flex-wrap -m-4">
-                    {product.map((item, index) => {
-                        const { title, price, description, imageUrl } = item;
+                    {product.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))
+                    .filter(item => item.catergory.toLowerCase().includes(filterType.toLowerCase()))
+                    .filter(item => Number(item.price) <= Number(filterPrice) || Number(filterPrice) == 0)
+                    .slice(0, 8)
+                    .map((item, index) => {
+                        const { id, title, price, description, imageUrl } = item;
+                        console.log(item)
                         return (
-                            <div key={`${imageUrl}`} className="p-4 md:w-1/4  drop-shadow-lg">
+                            <Link key={`${imageUrl}`} to={`/productinfo/${id}`} className="p-4 md:w-1/4  drop-shadow-lg">
                                 <div className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out border-gray-200 border-opacity-60 rounded-2xl overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
                                     <div className="flex justify-center cursor-pointer" >
                                         <img className=" rounded-2xl w-full h-80 p-2 hover:scale-110 transition-scale-110  duration-300 ease-in-out" src={`${imageUrl}`} alt="blog" />
@@ -43,11 +50,17 @@ function ProductCard() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })}
 
                 </div>
+                <div className='text-center mt-4'>
+                    <Link to='/allproducts' className= 'bg-gray-300 px-4 py-2'>
+                        More product
+                    </Link>
+                </div>
+
 
             </div>
         </section >

@@ -4,8 +4,7 @@ import MyContext from '../../context/data/myContext'
 
 function Filter() {
     const context = useContext(MyContext)
-    const { mode } = context
-
+    const { mode, product, searchKey, filterType, filterPrice, setSearchKey, setFilterType, setFilterPrice } = context
     return (
         <div>
            <div className=' container mx-auto px-4 mt-5 '>
@@ -21,6 +20,8 @@ function Filter() {
                             </svg>
                         </div>
                         <input
+                            value={searchKey}
+                            onChange={e => setSearchKey(e.target.value)}
                             type="text"
                             name="searchkey"
                             id="searchkey"
@@ -37,17 +38,20 @@ function Filter() {
                     </div>
                     <div>
                         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: mode === 'dark' ? 'rgb(64 66 70)' : '', color: mode === 'dark' ? 'white' : '', }}>
-                                <option value="jacket">Jacket</option>
-                                <option value="shirt">shirt</option>
-                                <option value="mobile">mobile</option>
-                                <option value="jacket">Jacket</option>
+                            <select value={filterType} onChange={e => setFilterType(e.target.value)} className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: mode === 'dark' ? 'rgb(64 66 70)' : '', color: mode === 'dark' ? 'white' : '', }}>
+                                <option value=''>Category</option>
+                                {product.map((item, index) => {
+                                    return <option key={index} value={item.catergory}>{item.catergory}</option>
+                                })}
                             </select>
-                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: mode === 'dark' ? 'rgb(64 66 70)' : '', color: mode === 'dark' ? 'white' : '', }}>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                                <option value="400">400</option>
+                            <select value={filterPrice} onChange={e => setFilterPrice(e.target.value)} className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: mode === 'dark' ? 'rgb(64 66 70)' : '', color: mode === 'dark' ? 'white' : '', }}>
+                                <option value='0'>Budget</option>
+                                <option value='1000'>1,000</option>
+                                <option value='5000'>5,000</option>
+                                <option value='10000'>10,000</option>
+                                <option value='20000'>20,000</option>
+                                <option value='30000'>30,000</option>
+                                <option value='50000'>50,000</option>
                             </select>
 
                         </div>

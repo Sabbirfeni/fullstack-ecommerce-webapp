@@ -141,16 +141,64 @@ function MyState(props) {
     }
   }
 
+  const [ users, setUsers ] = useState([])
+  const getUserData = async () => {
+    setLoading(true)
+    const usersArray = []
+    try {
+      const result = await getDocs(collection(fireDB, 'users'))
+     
+      result.forEach(doc => {
+        usersArray.push(doc.data())
+        setLoading(false)
+      })
+      setUsers(usersArray)
+      setLoading(false)
+
+    } catch(err) {
+      console.log(err.message)
+      setLoading(false)
+    }
+  }
+
+
+  const [ searchKey, setSearchKey ] = useState('')
+  const [ filterType, setFilterType ] = useState('')
+  const [ filterPrice, setFilterPrice ] = useState(0)
+
   useEffect(() => {
     getProductData()
+    getUserData()
   }, [])
 
   useEffect(() => {
     getOrderData()
   }, [])
 
+  const values = { 
+    mode, 
+    toggleMode, 
+    loading, 
+    setLoading, 
+    products, 
+    setProducts, 
+    addProduct, 
+    product, 
+    editHandle, 
+    updateProduct, 
+    deleteProduct, 
+    orders, 
+    users,
+    searchKey,
+    filterType,
+    filterPrice,
+    setSearchKey,
+    setFilterType,
+    setFilterPrice
+  }
+
   return (
-    <MyContext.Provider value={{ mode, toggleMode, loading, setLoading, products, setProducts, addProduct, product, editHandle, updateProduct, deleteProduct, orders }}>
+    <MyContext.Provider value={values}>
         {props.children}
     </MyContext.Provider>
   )
