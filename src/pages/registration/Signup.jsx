@@ -48,7 +48,7 @@ function Signup() {
             <div className="form-container flex flex-col justify-center items-center">
                 <p className="title">Create account</p>
                 <p className="sub-title">Let's get statred with your 30 days free trial</p>
-                <form className="form">
+                <form className="sign-form">
                     <input 
                         value={name} 
                         onChange={e => setName(e.target.value)}

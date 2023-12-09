@@ -1,13 +1,16 @@
 import { Fragment, useContext, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { Link, useNavigate } from 'react-router-dom'
-import { BsFillCloudSunFill } from 'react-icons/bs'
-import { FiSun } from 'react-icons/fi'
+// import { Dialog, Transition } from '@headlessui/react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+// import FileCopyIcon from '@material-ui/icons/FileCopy';
+
+
+// import { FiSun } from 'react-icons/fi'
 import myContext from '../../context/data/myContext'
-import { RxCross2 } from 'react-icons/rx'
-import { profile } from '../../assets/images'
+
+import { cart, logo, profile } from '../../assets/images'
 import { useSelector } from 'react-redux'
- 
+import './navbar.css'
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const context = useContext(myContext)
@@ -25,20 +28,87 @@ export default function Navbar() {
   }
   
   return (
-
-    <div className='flex'>
-      <div className='navbar-left'>
+    <div className='flex shadow-md px-4 md:px-12 lg:px-24 2xl:px-48 md:py-2 py-1.5 fixed w-full z-50 bg-[#f8f8f8]'>
+      <div className='navbar-left flex items-center justify-between md:space-x-6 space-x-3 flex-1 lg:flex-none'>
         {/* logo */}
-        <h1>Ecommerce</h1>
+        <div>
+        <Link to='/'>
+          <img src={logo} className='lg:w-15 md:w-14 w-12' alt="website logo" />
+        </Link>
+        </div>
+
+
         {/* search bar */}
-        <div>search bar</div>
+        <div className='relative'>
+          <input className="search-input" name="text" type="text" placeholder="Search product"/>
+          <svg className='absolute sm:top-3 top-2.5 right-3 w-4 cursor-pointer' fill="#000000"  viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+          </svg>
+        </div>
+
+
+        {/* cart */}
+        <div className='block lg:hidden'>
+          <Link to='/cart' className='relative'>
+            {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-orange-400'>{cartItems.length}</div>}
+            <img src={cart} className='w-5' alt="cart" />
+          </Link>
+        </div>
       </div>
-      <div className='navbar-middle flex-1'>
-        {/* nav menus */}
-        <div>menu</div>
-      </div>
-      <div className='navbar-right'>
-        <div>icons</div>
+      <div className='navbar-right hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
+
+            <NavLink to={'/allproducts'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+              All Products
+            </NavLink>
+            {
+              user && (
+                <NavLink to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Order
+                </NavLink>
+              )
+            }
+
+            {
+              isAdmin && (
+                <NavLink to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Admin
+                </NavLink>
+              )
+            }
+
+            {
+              user && (
+                <NavLink onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Logout
+                </NavLink>
+              )
+            }
+            {/* {
+              !user && (
+                <NavLink to='signup' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Signup
+                </NavLink>
+              )
+            } */}
+            {
+              !user && (
+                <NavLink to='login' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  Login
+                </NavLink>
+              )
+            }
+            {/* cart */}
+            <div className='hidden lg:block'>
+              <Link to='/cart' className='relative'>
+                {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-orange-400'>{cartItems.length}</div>}
+                <img src={cart} className='w-5' alt="cart" />
+              </Link>
+            </div>
+
+        {/* <div>menu</div> */}
+        <div>
+          {/* <ButtonGroup/> */}
+        </div>
         {/* notification icon */}
         {/* profile icon */}
           {/* short menu */}
@@ -47,6 +117,7 @@ export default function Navbar() {
             {/* logout */}
         {/* mode icon */}
       </div>
+
     </div>
     // <div className="bg-white sticky top-0 z-50">
     //   {/* Mobile menu */}

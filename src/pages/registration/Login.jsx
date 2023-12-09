@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase/FirebaseConfig'
 import { toast } from 'react-toastify'
 import MyContext from '../../context/data/myContext'
+import './signup.css'
 
 function Login() {
     const [ loading, setLoading ] = useState(false)
@@ -65,7 +66,7 @@ function Login() {
             <div className="form-container flex flex-col justify-center items-center">
                 <p className="title">Login</p>
                 {/* <p class="sub-title">Let's get statred with your 30 days free trial</p> */}
-                <form className="form">
+                <form className="sign-form">
                     <input 
                         value={email} 
                         onChange={e => setEmail(e.target.value)}

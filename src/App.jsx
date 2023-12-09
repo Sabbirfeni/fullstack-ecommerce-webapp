@@ -6,7 +6,7 @@ import MyContext from './context/data/myContext'
 import MyState from './context/data/myState'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-  
+
 function App() {
   return  (
     <MyState>

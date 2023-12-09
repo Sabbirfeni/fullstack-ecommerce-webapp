@@ -1,3 +1,4 @@
+
 .form-container {
     width: 350px;
     /* height: 550px; */
@@ -39,7 +40,7 @@
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
   
-  .form {
+  .sign-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -48,18 +49,18 @@
     font-size: 14px;
   }
   
-  .input {
+  .sign-form .input {
     border-radius: 25px;
     border: 1px solid #c0c0c0;
     outline: 0 !important;
     box-sizing: border-box;
     padding: 10px 15px;
   }
-  .input::placeholder {
+  .sign-form .input::placeholder {
     font-size: 13px;
   }
   
-  .form-btn {
+  .sign-form .form-btn {
     padding: 10px 15px;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -72,11 +73,11 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   
-  .form-btn:active {
+  .sign-form .form-btn:active {
     box-shadow: none;
   }
 
-  .form-btn:hover {
+  .sign-form .form-btn:hover {
     background: #007272;
   }
   
