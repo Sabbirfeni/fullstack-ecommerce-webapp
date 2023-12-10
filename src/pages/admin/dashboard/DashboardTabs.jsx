@@ -248,7 +248,6 @@ function DashboardTab() {
                                     </thead>
                                     <tbody>
                                         {users.map((item, index) => {
-                                            console.log(item)
                                             const { name, uid, email } = item
                                             return (
                                                 <tr key={index} className="bg-gray-50 border-b  dark:border-gray-700" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >

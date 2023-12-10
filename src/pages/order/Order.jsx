@@ -5,6 +5,7 @@ function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid;
   const context = useContext(MyContext);
   const { mode, loading, orders } = context;
+  console.log(orders)
   // debugger
   
   if(loading) {

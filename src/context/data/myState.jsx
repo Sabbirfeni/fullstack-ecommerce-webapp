@@ -188,6 +188,7 @@ function MyState(props) {
     updateProduct, 
     deleteProduct, 
     orders, 
+    setOrders,
     users,
     searchKey,
     filterType,

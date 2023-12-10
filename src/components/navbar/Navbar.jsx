@@ -1,24 +1,19 @@
-import { Fragment, useContext, useState } from 'react'
-// import { Dialog, Transition } from '@headlessui/react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-// import FileCopyIcon from '@material-ui/icons/FileCopy';
-
-
-// import { FiSun } from 'react-icons/fi'
 import myContext from '../../context/data/myContext'
-
-import { cart, logo, profile } from '../../assets/images'
+import { cart, logo } from '../../assets/images'
 import { useSelector } from 'react-redux'
 import './navbar.css'
+import { Avatar } from '@mui/material'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
   const context = useContext(myContext)
   const { toggleMode, mode } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const cartItems = useSelector(state => state.cart)
   const navigate = useNavigate()
-  // const isAdmin = user ? user.user.email == 'sabbirholybangla@gmail.com' ? true : false : false;
   const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
 
   const logout = () => {
@@ -26,9 +21,13 @@ export default function Navbar() {
     localStorage.clear('user');
     navigate('/login')
   }
+
+  const handleProfileMenu = () => {
+    setProfileMenuOpen(!profileMenuOpen)
+  }
   
   return (
-    <div className='flex shadow-md px-4 md:px-12 lg:px-24 2xl:px-48 md:py-2 py-1.5 fixed w-full z-50 bg-[#f8f8f8]'>
+    <div className='flex shadow-md px-5 md:px-12 lg:px-24 2xl:px-48 md:py-2 py-2 fixed w-full z-50 bg-[#f8f8f8]'>
       <div className='navbar-left flex items-center justify-between md:space-x-6 space-x-3 flex-1 lg:flex-none'>
         {/* logo */}
         <div>
@@ -37,12 +36,11 @@ export default function Navbar() {
         </Link>
         </div>
 
-
         {/* search bar */}
         <div className='relative'>
           <input className="search-input" name="text" type="text" placeholder="Search product"/>
           <svg className='absolute sm:top-3 top-2.5 right-3 w-4 cursor-pointer' fill="#000000"  viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fillRule="evenodd"></path>
           </svg>
         </div>
 
@@ -55,299 +53,81 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
       <div className='navbar-right hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
 
-            <NavLink to={'/allproducts'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-              All Products
-            </NavLink>
-            {
-              user && (
-                <NavLink to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Order
-                </NavLink>
-              )
-            }
+        <NavLink to='/' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+          Home
+        </NavLink>
 
-            {
-              isAdmin && (
-                <NavLink to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Admin
-                </NavLink>
-              )
-            }
-
-            {
-              user && (
-                <NavLink onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Logout
-                </NavLink>
-              )
-            }
-            {/* {
-              !user && (
-                <NavLink to='signup' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Signup
-                </NavLink>
-              )
-            } */}
-            {
-              !user && (
-                <NavLink to='login' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                  Login
-                </NavLink>
-              )
-            }
-            {/* cart */}
-            <div className='hidden lg:block'>
-              <Link to='/cart' className='relative'>
-                {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-orange-400'>{cartItems.length}</div>}
-                <img src={cart} className='w-5' alt="cart" />
-              </Link>
-            </div>
-
-        {/* <div>menu</div> */}
-        <div>
-          {/* <ButtonGroup/> */}
+        <NavLink to='/allproducts' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+          All Products
+        </NavLink>
+        {/* cart */}
+        <div className='hidden lg:block'>
+          <Link to='/cart' className='relative'>
+            {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-orange-400'>{cartItems.length}</div>}
+            <img src={cart} className='w-5' alt="cart" />
+          </Link>
         </div>
+
+        {
+          !user && (
+            <NavLink to='login' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+              Login
+            </NavLink>
+          )
+        }
+
+        {
+          !user && (
+            <NavLink to='signup' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+              Create account
+            </NavLink>
+          )
+        }
+    
         {/* notification icon */}
+
         {/* profile icon */}
-          {/* short menu */}
-            {/* profile */}
-            {/* dashboar */}
-            {/* logout */}
+        { user && (
+        <div className='cursor-pointer relative'>
+          <Avatar onClick={handleProfileMenu} className='border-2 border-[#919191]' style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
+            
+            <div className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+              <Link onClick={handleProfileMenu} className='hover:bg-gray-200 pt-3 py-1.5 px-3 rounded-t-md'>Profile</Link>
+
+              {/* dashboard item will show if user is admin */}
+              {isAdmin && (
+                <Link to='/dashboard' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+              )}
+              
+              
+              <Link to='/order' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>My orders</Link>
+
+              {/* Logout item */}
+              
+                <Link 
+                  onClick={() => {
+                    handleProfileMenu();
+                    logout()
+                  }} 
+                  className='hover:bg-gray-200 pb-3 py-1.5 px-3 rounded-b-md'
+                >
+                    Logout
+                </Link>
+            
+            </div>
+           
+        </div>
+        )}
+
         {/* mode icon */}
       </div>
 
+      {/* Wrapper for profile menu item when active it will show up and when click anywhere of this div profile menu will be hidden */}
+      {profileMenuOpen && <div onClick={handleProfileMenu} className='w-[100%] h-screen absolute top-0 bottom-0 right-0 z-40 bg-[#00000000]'></div>}
     </div>
-    // <div className="bg-white sticky top-0 z-50">
-    //   {/* Mobile menu */}
-    //   <Transition.Root show={open} as={Fragment}>
-    //     <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
-    //       <Transition.Child
-    //         as={Fragment}
-    //         enter="transition-opacity ease-linear duration-300"
-    //         enterFrom="opacity-0"
-    //         enterTo="opacity-100"
-    //         leave="transition-opacity ease-linear duration-300"
-    //         leaveFrom="opacity-100"
-    //         leaveTo="opacity-0"
-    //       >
-    //         <div className="fixed inset-0 bg-black bg-opacity-25" />
-    //       </Transition.Child>
-
-    //       <div className="fixed inset-0 z-40 flex">
-    //         <Transition.Child
-    //           as={Fragment}
-    //           enter="transition ease-in-out duration-300 transform"
-    //           enterFrom="-translate-x-full"
-    //           enterTo="translate-x-0"
-    //           leave="transition ease-in-out duration-300 transform"
-    //           leaveFrom="translate-x-0"
-    //           leaveTo="-translate-x-full"
-    //         >
-    //           <Dialog.Panel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl" style={{ backgroundColor: mode === 'dark' ? 'rgb(40, 44, 52)' : '', color: mode === 'dark' ? 'white' : '', }}>
-    //             <div className="flex px-4 pb-2 pt-28">
-    //               <button
-    //                 type="button"
-    //                 className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-    //                 onClick={() => setOpen(false)}
-    //               >
-    //                 <span className="sr-only">Close menu</span>
-    //                 <RxCross2 />
-    //               </button>
-    //             </div>
-    //             <div className="flex flex-col space-y-6 border-t border-gray-200 px-4 py-6">
-                  
-    //               <Link to={'/allproducts'} className="text-sm font-medium text-gray-900 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                 All Products
-    //               </Link>
-    //               {
-    //                 user && (
-    //                   <div className="flow-root">
-    //                     <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-gray-900">
-    //                       Order
-    //                     </Link>
-    //                   </div>
-    //                 )
-    //               }
-                  
-
-    //               {isAdmin  && (
-    //                 <div className="flow-root">
-    //                   <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     admin
-    //                   </Link>
-    //                 </div>
-    //               )}
-                  
-    //               {
-    //                 user && (
-    //                   <div onClick={logout} className="flow-root">
-    //                     <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                       Logout
-    //                     </a>
-    //                   </div>
-    //                 )
-    //               }
-    //               {
-    //                 !user && (
-    //                   <Link to='signup' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Signup
-    //                   </Link>
-    //                 )
-    //               }
-    //               {
-    //                 !user && (
-    //                   <Link to='login' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Login
-    //                   </Link>
-    //                 )
-    //               }
-                  
-    //               <div className="flow-root">
-    //                 <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
-    //                   <img
-    //                     className="inline-block w-10 h-10 rounded-full"
-    //                     src={profile}
-    //                     alt="Dan_Abromov" />
-    //                 </Link>
-    //               </div>
-    //             </div>
-
-               
-    //           </Dialog.Panel>
-    //         </Transition.Child>
-    //       </div>
-    //     </Dialog>
-    //   </Transition.Root>
-
-    //   {/* desktop  */}
-    //   <header className="relative bg-white">
-    //     <p className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8" style={{ backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '', color: mode === 'dark' ? 'white' : '', }}>
-    //       Get free delivery on orders over ₹300
-    //     </p>
-
-    //     <nav aria-label="Top" className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
-    //       <div className="">
-    //         <div className="flex h-16 items-center">
-    //           <button
-    //             type="button"
-    //             className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
-    //             onClick={() => setOpen(true)} style={{ backgroundColor: mode === 'dark' ? 'rgb(80 82 87)' : '', color: mode === 'dark' ? 'white' : '', }}
-    //           >
-    //             <span className="sr-only">Open menu</span>
-    //             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-    //               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-    //             </svg>
-
-    //           </button>
-
-    //           {/* Logo */}
-    //           <div className="ml-4 flex lg:ml-0">
-    //             <Link to={'/'} className='flex'>
-    //               <div className="flex ">
-    //                 <h1 className=' text-2xl font-bold text-black  px-2 py-1 rounded' style={{ color: mode === 'dark' ? 'white' : '', }}>E-Bharat</h1>
-    //               </div>
-    //             </Link>
-    //           </div>
-
-    //           <div className="ml-auto flex items-center">
-    //             <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-
-    //               <Link to={'/allproducts'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                 All Products
-    //               </Link>
-    //               {
-    //                 user && (
-    //                   <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Order
-    //                   </Link>
-    //                 )
-    //               }
-                
-    //               {
-    //                 isAdmin && (
-    //                   <Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Admin
-    //                   </Link>
-    //                 )
-    //               }
-                 
-    //               {
-    //                 user && (
-    //                   <Link onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Logout
-    //                   </Link>
-    //                 )
-    //               }
-    //               {
-    //                 !user && (
-    //                   <Link to='signup' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Signup
-    //                   </Link>
-    //                 )
-    //               }
-    //               {
-    //                 !user && (
-    //                   <Link to='login' className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                     Login
-    //                   </Link>
-    //                 )
-    //               }
-                 
-                 
-
-                  
-    //             </div>
-
-    //             <div className="hidden lg:ml-8 lg:flex">
-    //               <a href="#" className="flex items-center text-gray-700 ">
-    //                 <img
-    //                   src="https://ecommerce-sk.vercel.app/img/indiaflag.png"
-    //                   alt=""
-    //                   className="block h-auto w-5 flex-shrink-0"
-    //                 />
-    //                 <span className="ml-3 block text-sm font-medium" style={{ color: mode === 'dark' ? 'white' : '', }}>INDIA</span>
-    //               </a>
-    //             </div>
-    //             <div className="hidden lg:ml-8 lg:flex">
-    //               <a href="#" className="flex items-center text-gray-700 ">
-    //                 <img
-    //                   className="inline-block w-10 h-10 rounded-full"
-    //                   src={profile}
-    //                   alt="Dan_Abromov" />
-    //               </a>
-    //             </div>
-
-    //             {/* Search */}
-    //             <div className="flex lg:ml-6">
-    //               <button className='' onClick={toggleMode}>
-    //                 {/* <MdDarkMode size={35} style={{ color: mode === 'dark' ? 'white' : '' }} /> */}
-    //                 {mode === 'light' ?
-    //                   (<FiSun className='' size={30} />
-    //                   ) : 'dark' ?
-    //                     (<BsFillCloudSunFill size={30} />
-    //                     ) : ''}
-    //               </button>
-    //             </div>
-
-    //             {/* Cart */}
-    //             <div className="ml-4 flow-root lg:ml-6">
-    //               <Link to={'/cart'} className="group -m-2 flex items-center p-2" style={{ color: mode === 'dark' ? 'white' : '', }}>
-    //                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-    //                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-    //                 </svg>
-
-    //                 <span className={`ml-2 text-sm font-medium px-4 py-2 text-${cartItems.length > 0 ? 'text-slate-500 bg-red-500' : 'text-gray-700 bg-transparent'} group-`} style={{ color: mode === 'dark' ? 'white' : '', }}>{cartItems.length}</span>
-    //                 <span className="sr-only">items in cart, view bag</span>
-    //               </Link>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </nav>
-    //   </header>
-    // </div>
   )
 }
 

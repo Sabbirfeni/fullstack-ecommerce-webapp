@@ -5,18 +5,19 @@ import Modal from '../../components/modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFromCart } from '../../redux/cartSlice';
 import { toast } from 'react-toastify';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { fireDB } from '../../firebase/FirebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 
 function Cart() {
 
   const context = useContext(myContext)
-  const { mode } = context;
+  const { mode, setOrders, setLoading } = context;
   const cartItem = useSelector(state => state.cart)
   const user = JSON.parse(localStorage.getItem('user')) 
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
 
   // All the values of fakepay form (order form)
   const [ addressInfo, setAddressInfo ] = useState({
@@ -60,13 +61,19 @@ function Cart() {
     try {
       const docRef = collection(fireDB, 'orders')
       await addDoc(docRef, userInfoWithOrder)
+
+      const orders = await getDocs(collection(fireDB, 'orders'))
+      const orderArray = [];
+      orders.forEach(doc => {
+        orderArray.push(doc.data())
+        setLoading(false)
+      })
+      setOrders(orderArray)
+      navigate('/order')
       toast.success('Order successfully completed!')
     } catch(err) {
       console.log(err)
     }
-
-
-
   }
 
   const deleteCart = item => {
@@ -89,6 +96,7 @@ function Cart() {
     setTotalAmount(temp)
 
   }, [cartItem])
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
