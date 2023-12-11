@@ -24,7 +24,7 @@ function BottomBar() {
   return (
     <div className='bottom-bar py-2 md:py-3 flex lg:hidden fixed items-center justify-around text-xs md:text-sm bottom-0 w-full bg-[#fff]'>
         <NavLink to='/' className='flex flex-col items-center w-full md:border-r border-black hover:text-[#1ea5ff]'>
-            <BiHome style={{ width: 21, height: 21 }}/>
+            <BiHome style={{ width: 21, height: 21 }} className=''/>
             <div>Home</div>
         </NavLink>
         <NavLink to='/allproducts' className='flex flex-col items-center w-full md:border-r border-black hover:text-[#1ea5ff]'>

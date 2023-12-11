@@ -7,12 +7,12 @@ import BottomBar from '../bottomBar/BottomBar'
 function Layout() {
   return (
     <div>
-        <Navbar/>
-        <div className='content'>
-            {<Outlet/>}
-        </div>
-        <BottomBar/>
-        <Footer/>
+      <Navbar/>
+      <div className='container mx-auto sm:px-5 px-2 md:pt-[80px] pt-[65px]'>
+          {<Outlet/>}
+      </div>
+      <BottomBar/>
+      <Footer/>
     </div>
   )
 }

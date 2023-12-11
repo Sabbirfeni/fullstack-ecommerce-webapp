@@ -1,3 +1,7 @@
+.bottom-bar a {
+    color: #000;
+}
+
 .bottom-bar a.active {
     color: #1ea5ff;
 }
