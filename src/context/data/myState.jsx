@@ -164,7 +164,7 @@ function MyState(props) {
 
   const [ searchKey, setSearchKey ] = useState('')
   const [ filterType, setFilterType ] = useState('')
-  const [ filterPrice, setFilterPrice ] = useState(0)
+  const [ filterPrice, setFilterPrice ] = useState('')
 
   useEffect(() => {
     getProductData()

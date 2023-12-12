@@ -12,7 +12,6 @@ function HeroSection() {
                 <div className='bg-slate-300 flex-1'>left-bottom-left</div>
                 <div className='bg-slate-300 flex-1'>left-bottom-middle</div>
               </div>
-
               <div className='bg-slate-300 flex-1'>left-bottom-right</div>
             </div>
           </div>
@@ -23,10 +22,7 @@ function HeroSection() {
               <div className='bg-slate-300 flex-1 lg:h-[30vh] h-full'>right-bottom</div>
           </div>
         </div>
-
-
       </div>
-
     </div>
   )
 }

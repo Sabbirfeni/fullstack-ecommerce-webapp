@@ -6,12 +6,16 @@ import MyContext from './context/data/myContext'
 import MyState from './context/data/myState'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ThemeProvider } from '@mui/material/styles';
+import { colorTheme } from './theme/colorTheme'
 
 function App() {
   return  (
     <MyState>
-      <RouterProvider router={router}/>
-      <ToastContainer />
+      <ThemeProvider theme={colorTheme}>
+        <RouterProvider router={router}/>
+        <ToastContainer />
+      </ThemeProvider>
     </MyState>
   )
 }
