@@ -22,7 +22,7 @@ function Filter() {
         <div className='my-8'>
             <div className="flex">
                 <div className='filter-options flex-1 flex items-center gap-5'>
-                    <p className='bg-[#000] text-[#fff] px-5 py-2 rounded-sm'>Filters</p>
+                    <p className='bg-slate-200 text-[#000] px-5 py-2 rounded-sm'>Filters</p>
                     <FormControl sx={{ width: '150px' }}>
                         <InputLabel id="catergory" color='secondary' size='small' sx={{ fontSize: '14px' }}>Catergory</InputLabel>
                         <Select
@@ -33,7 +33,7 @@ function Filter() {
                             onChange={e => setFilterType(e.target.value)}
                             color='secondary'
                             size='small'
-                            sx={{ fontSize: '14px', padding: '1px 0px' }}
+                            sx={{ fontSize: '14px', padding: '1px 0px', }}
                             MenuProps={{
                                 disableScrollLock: true,
                               }}
@@ -70,7 +70,7 @@ function Filter() {
                     </FormControl>
                 </div>
                 <div className='reset-filter flex-1 flex items-center justify-end'>
-                    <button onClick={resetFilters} className='bg-[#000] text-[#fff] px-4 py-2 rounded-sm'>Reset filters</button>
+                    <button onClick={resetFilters} className='bg-slate-200 text-[#000] px-4 py-2 rounded-sm'>Reset filters</button>
                 </div>
             </div>
         </div>

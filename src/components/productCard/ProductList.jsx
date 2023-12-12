@@ -3,7 +3,8 @@ import myContext from '../../context/data/myContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { Link } from 'react-router-dom'
-import { product1 } from '../../assets/images'
+import { product1, product2 } from '../../assets/images'
+import './productCard.css'
 
 function ProductList() {
     const context = useContext(myContext)
@@ -23,159 +24,308 @@ function ProductList() {
 
         <div>
             <div className='product-list grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 grid-cols-3 gap-4'>
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-
-                <div className='product-card-container rounded-sm shadow-md h-[490px]'>
-                    <img src={product1} alt="" className='h-2/3 w-full object-cover' />
-                    <div className='p-5 h-1/3 relative'>
-                        <div className='1'>
-                            <h3 className='text-xl font-bold'>Title</h3>
-                            <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 30 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 70) + '...' : 'details details details details details details details details'}</p>
-                        </div>
-                        <div className='absolute bottom-0 left-0 w-full p-5'>
-                            <div className='flex items-center justify-between'>
-                                <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
                             </div>
-                        </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-               
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                
             </div>
             {/* Product card */}
 
