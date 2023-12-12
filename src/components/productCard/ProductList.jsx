@@ -33,7 +33,7 @@ function ProductList() {
                         <div className='absolute bottom-0 left-0 w-full p-5'>
                             <div className='flex items-center justify-between'>
                                 <h4 className='text-xl font-bold'>$399</h4>
-                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-sm rounded-sm'>Add to cart</button>
+                                <button className='bg-[#000] text-[#fff] px-3 py-2 text-xs rounded-sm'>Add to cart</button>
                             </div>
                         </div>
 
