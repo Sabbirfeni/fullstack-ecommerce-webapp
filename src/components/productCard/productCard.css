@@ -1,3 +1,10 @@
+.product-card-container {
+    transition: 0.3s ease;
+}
+.product-card-container:hover {
+    background: rgb(226 232 240);
+}
+
 .product-img-container {
     overflow: hidden;
 }

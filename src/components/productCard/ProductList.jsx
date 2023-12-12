@@ -3,7 +3,7 @@ import myContext from '../../context/data/myContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { Link } from 'react-router-dom'
-import { product1, product2 } from '../../assets/images'
+import { product1, product2, product3 } from '../../assets/images'
 import './productCard.css'
 
 function ProductList() {
@@ -46,7 +46,27 @@ function ProductList() {
                 </div>
                 <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
                     <div className='product-img-container h-2/3'>
-                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                        <img src={product2} alt="" className='w-full h-full object-cover' />
+                    </div>
+                    <div className='h-1/3 p-5'>
+                        <div className='h-full relative'>
+                            <div className='1'>
+                                <h3 className='text-xl font-bold mb-2'>Title</h3>
+                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
+                            </div>
+                            <div className='absolute bottom-0 left-0 w-full'>
+                                <div className='flex items-center justify-between'>
+                                    <h4 className='text-xl font-bold'>$399</h4>
+                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
+                    <div className='product-img-container h-2/3'>
+                        <img src={product3} alt="" className='w-full h-full object-cover' />
                     </div>
                     <div className='h-1/3 p-5'>
                         <div className='h-full relative'>
@@ -86,7 +106,7 @@ function ProductList() {
                 </div>
                 <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
                     <div className='product-img-container h-2/3'>
-                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                        <img src={product2} alt="" className='w-full h-full object-cover' />
                     </div>
                     <div className='h-1/3 p-5'>
                         <div className='h-full relative'>
@@ -106,27 +126,7 @@ function ProductList() {
                 </div>
                 <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
                     <div className='product-img-container h-2/3'>
-                        <img src={product1} alt="" className='w-full h-full object-cover' />
-                    </div>
-                    <div className='h-1/3 p-5'>
-                        <div className='h-full relative'>
-                            <div className='1'>
-                                <h3 className='text-xl font-bold mb-2'>Title</h3>
-                                <p className='text-sm'>{'details details details details details details details details details details details details details details details details details details details details'.length > 40 ? `details details details details details details details details details details details details details details details details details details details details`.slice(0, 40) + '...' : 'details details details details details details details details'}</p>
-                            </div>
-                            <div className='absolute bottom-0 left-0 w-full'>
-                                <div className='flex items-center justify-between'>
-                                    <h4 className='text-xl font-bold'>$399</h4>
-                                    <button className='addto-card-btn px-3 py-2 text-xs rounded-sm'>Add to cart</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div className='product-card-container cursor-pointer rounded-sm shadow-xl h-[490px]'>
-                    <div className='product-img-container h-2/3'>
-                        <img src={product1} alt="" className='w-full h-full object-cover' />
+                        <img src={product3} alt="" className='w-full h-full object-cover' />
                     </div>
                     <div className='h-1/3 p-5'>
                         <div className='h-full relative'>
