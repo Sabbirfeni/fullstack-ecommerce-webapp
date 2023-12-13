@@ -49,7 +49,7 @@ export default function Navbar() {
           {/* cart */}
           <div className='block lg:hidden'>
             <Link to='/cart' className='relative'>
-              {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-orange-400'>{cartItems.length}</div>}
+              {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#000]'>{cartItems.length}</div>}
               <img src={cart} className='w-5' alt="cart" />
             </Link>
           </div>

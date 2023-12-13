@@ -12,8 +12,8 @@ function Home() {
       <HeroSection/>
       <Filter/>
       <ProductList/>
-      <Track/>
-      <Testimonial/>
+      {/* <Track/> */}
+      {/* <Testimonial/> */}
     </div>
   )
 }

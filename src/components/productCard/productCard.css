@@ -27,3 +27,7 @@
     background: #000; 
     color: #fff;
 }
+
+.addto-card-btn:hover .product-card-container {
+    pointer-events: none;
+}

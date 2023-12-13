@@ -22,7 +22,7 @@ function Filter() {
         <div className='my-8'>
             <div className="flex">
                 <div className='filter-options flex-1 flex items-center gap-5'>
-                    <p className='bg-slate-200 text-[#000] px-5 py-2 rounded-sm'>Filters</p>
+                    <p className='border border-slate-200 text-[#000] px-5 py-2 rounded-sm'>Filters</p>
                     <FormControl sx={{ width: '150px' }}>
                         <InputLabel id="catergory" color='secondary' size='small' sx={{ fontSize: '14px' }}>Catergory</InputLabel>
                         <Select
