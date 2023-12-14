@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Cart() {
-
+  // cart
   const context = useContext(myContext)
   const { mode, setOrders, setLoading } = context;
   const cartItem = useSelector(state => state.cart)
