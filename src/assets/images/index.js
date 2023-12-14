@@ -7,6 +7,9 @@ import product3 from '../images/product-3.jpg'
 import leftBottomLeft from '../images/left-bottom-left.jpg'
 import leftBottomMiddle from '../images/left-bottom-middle.jpg'
 import leftBottomRight from '../images/left-bottom-right.jpg'
+import rightTop from '../images/right-top.jpg'
+import rightBottom from '../images/right-bottom.jpg'
+
 export {
     profile,
     logo,
@@ -16,5 +19,7 @@ export {
     product3,
     leftBottomLeft,
     leftBottomMiddle,
-    leftBottomRight
+    leftBottomRight,
+    rightBottom,
+    rightTop
 }

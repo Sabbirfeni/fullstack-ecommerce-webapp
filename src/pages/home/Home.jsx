@@ -11,7 +11,7 @@ function Home() {
     <div>
       <HeroSection/>
       <Filter/>
-      <ProductList/>
+      <ProductList limit={16}/>
       {/* <Track/> */}
       {/* <Testimonial/> */}
     </div>

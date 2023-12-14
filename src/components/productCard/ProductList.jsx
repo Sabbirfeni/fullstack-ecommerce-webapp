@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { Link } from 'react-router-dom'
 import { product1, product2, product3 } from '../../assets/images'
-import './productCard.css'
+import './productList.css'
 
-function ProductList() {
+function ProductList({ limit }) {
     const context = useContext(myContext)
     const { mode, product, searchKey, filterType, filterPrice, } = context
  
@@ -27,7 +27,7 @@ function ProductList() {
             {product.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))
                     .filter(item => item.catergory.toLowerCase().includes(filterType.toLowerCase()))
                     .filter(item => Number(item.price) <= Number(filterPrice) || Number(filterPrice) == 0)
-                    .slice(0, 8)
+                    .slice(0, limit)
                     .map((item, index, arr) => {
                         const { id, title, price, description, imageUrl } = item;
                         

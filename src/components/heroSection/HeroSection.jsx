@@ -1,10 +1,10 @@
 import React from 'react'
 import { heroVideo } from '../../assets/videos'
-import { leftBottomLeft, leftBottomMiddle, leftBottomRight } from '../../assets/images'
+import { leftBottomLeft, leftBottomMiddle, leftBottomRight, rightBottom, rightTop } from '../../assets/images'
 
 function HeroSection() {
   return (
-    <div>
+    <div className='mb-4 md:mb-8'>
       <div className='min-h-[60vh] flex lg:flex-row flex-col gap-2 overflow-hidden'>
         <div className='left-hero lg:w-2/3 w-full flex flex-col gap-2 overflow-hidden'>
           <div className='left-top bg-slate-300 lg:h-2/3 h-[30vh] relative w-full overflow-hidden shadow-lg rounded-md'>
@@ -32,10 +32,10 @@ function HeroSection() {
         <div className='lg:h-[65vh] h-[25vh] lg:w-1/3 w-full'>
           <div className='right-hero flex lg:flex-col flex-row gap-2 h-full w-full'>
               <div className='bg-slate-300 flex-1 lg:h-[30vh] h-full flex items-center justify-center overflow-hidden shadow-lg rounded-md'>
-                <img src={leftBottomMiddle} className='w-full h-[fit-content]' alt="" />
+                <img src={rightTop} className='w-full h-[fit-content]' alt="" />
               </div>
               <div className='bg-slate-300 flex-1 lg:h-[30vh] h-full flex items-center justify-center overflow-hidden shadow-lg rounded-md'>
-                <img src={leftBottomLeft} className='w-full h-[fit-content]' alt="" />
+                <img src={rightBottom} className='w-full h-[fit-content]' alt="" />
               </div>
           </div>
         </div>

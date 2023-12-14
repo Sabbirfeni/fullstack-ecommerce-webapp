@@ -19,12 +19,12 @@ function Filter() {
     }
 
     return (
-        <div className='my-8'>
+        <div className='mb-4 md:mb-8'>
             <div className="flex">
-                <div className='filter-options flex-1 flex items-center gap-5'>
-                    <p className='border border-slate-200 text-[#000] px-5 py-2 rounded-sm'>Filters</p>
-                    <FormControl sx={{ width: '150px' }}>
-                        <InputLabel id="catergory" color='secondary' size='small' sx={{ fontSize: '14px' }}>Catergory</InputLabel>
+                <div className='filter-options flex-1 flex items-center gap-2 gap-md-5'>
+                    {/* <p className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Filters</p> */}
+                    <FormControl sx={{ width: { xs: '100px', md:'150px' } }}>
+                        <InputLabel id="catergory" color='secondary' className='flex justify-center items-center' size='small' sx={{ fontSize: { xs: '13px', md: '14px'}, marginTop: '3px' }}>Catergory</InputLabel>
                         <Select
                             labelId="catergory"
                             id="catergory"
@@ -33,7 +33,7 @@ function Filter() {
                             onChange={e => setFilterType(e.target.value)}
                             color='secondary'
                             size='small'
-                            sx={{ fontSize: '14px', padding: '1px 0px', }}
+                            sx={{ padding: { xs: '1px 0px', md: '2px 0px' },}}
                             MenuProps={{
                                 disableScrollLock: true,
                               }}
@@ -44,8 +44,8 @@ function Filter() {
                             
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ width: '150px' }}>
-                        <InputLabel id="budget" color='secondary' size='small' sx={{ fontSize: '14px' }}>Budget</InputLabel>
+                    <FormControl sx={{ width: { xs: '85px', md:'150px' } }}>
+                        <InputLabel id="budget" color='secondary' size='small' sx={{ fontSize: { xs: '12px', md: '14px'}, marginTop: '3px'}}>Budget</InputLabel>
                         <Select
                             labelId="budget"
                             id="budget"
@@ -54,7 +54,7 @@ function Filter() {
                             onChange={e => setFilterPrice(Number(e.target.value))}
                             color='secondary'
                             size='small'
-                            sx={{ fontSize: '14px', padding: '1px 0px' }}
+                            sx={{ padding: { xs: '1px 0px', md: '2px 0px' }}}
                             MenuProps={{
                                 disableScrollLock: true,
                               }}
@@ -70,7 +70,7 @@ function Filter() {
                     </FormControl>
                 </div>
                 <div className='reset-filter flex-1 flex items-center justify-end'>
-                    <button onClick={resetFilters} className='bg-slate-200 text-[#000] px-4 py-2 rounded-sm'>Reset filters</button>
+                    <button onClick={resetFilters} className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Reset filters</button>
                 </div>
             </div>
         </div>
