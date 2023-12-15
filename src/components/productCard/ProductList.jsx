@@ -22,7 +22,7 @@ function ProductList({ limit }) {
     }, [cartItem])
     return (
         <div className='mb-8'>
-            <div className='product-list grid sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 grid-cols-2 gap-2 md:gap-3 lg:gap-4'>
+            <div className='product-list grid sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 grid-cols-2 gap-2 md:gap-3'>
             
             {product.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))
                     .filter(item => item.catergory.toLowerCase().includes(filterType.toLowerCase()))
@@ -32,7 +32,7 @@ function ProductList({ limit }) {
                         const { id, title, price, description, imageUrl } = item;
                         
                         return (
-                            <Link to={`/productinfo/${id}`} key={`${title}-${id}`} className='product-card-container cursor-pointer rounded-md shadow-xl h-[280px] md:h-[300px] lg:h-[360px] xl:h-[400px]'>
+                            <Link to={`/productinfo/${id}`} key={`${title}-${id}`} className='product-card-container cursor-pointer rounded-md h-[280px] md:h-[300px] lg:h-[360px] xl:h-[400px]'>
                 
                                 <div className='product-img-container h-2/3 md:h-3/5'>
                                     <img src={`${imageUrl}`} alt="product-image" className='w-full h-full object-cover rounded-t-md' />

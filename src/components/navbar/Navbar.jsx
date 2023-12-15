@@ -27,8 +27,8 @@ export default function Navbar() {
   }
   // px-5 md:px-12 lg:px-24 2xl:px-48
   return (
-    <div className='fixed w-full z-50 border-b border-[#ececec]'>
-      <div className='flex container mx-auto md:py-2 py-2 sm:px-5 px-4 bg-[#f8f8f8]'>
+    <div className='fixed w-full z-50 border-b border-[#ececec] bg-[#f8f8f8]'>
+      <div className='flex container mx-auto md:py-2 py-2 sm:px-5 px-4'>
         <div className='navbar-left flex  items-center justify-between md:space-x-6 space-x-3 flex-1 lg:flex-none'>
           {/* logo */}
           <div>
@@ -131,7 +131,6 @@ export default function Navbar() {
         {profileMenuOpen && <div onClick={handleProfileMenu} className='w-[100%] h-screen absolute top-0 bottom-0 right-0 z-40 bg-[#00000000]'></div>}
       </div>
     </div>
-
   )
 }
 

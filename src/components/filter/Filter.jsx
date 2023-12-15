@@ -19,7 +19,7 @@ function Filter() {
     }
 
     return (
-        <div className='mb-4 md:mb-8'>
+        <div className=''>
             <div className="flex">
                 <div className='filter-options flex-1 flex items-center gap-2 gap-md-5'>
                     {/* <p className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Filters</p> */}

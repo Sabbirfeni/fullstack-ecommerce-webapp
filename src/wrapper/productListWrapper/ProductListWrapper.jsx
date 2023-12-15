@@ -1,8 +1,10 @@
 import React from 'react'
 
-function ProductListWrapper() {
+function ProductListWrapper({ children }) {
   return (
-    <div>ProductListWrapper</div>
+    <div >
+
+    </div>
   )
 }
 

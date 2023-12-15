@@ -4,14 +4,20 @@ import Filter from '../../components/filter/Filter'
 import Track from '../../components/track/Track'
 import Testimonial from '../../components/testimonial/Testimonial'
 import ProductList from '../../components/productCard/ProductList'
+import SpaceWrapper from '../../wrapper/productListWrapper/spaceWrapper'
 
 function Home() {
 
   return (
     <div>
       <HeroSection/>
-      <Filter/>
-      <ProductList limit={16}/>
+      <SpaceWrapper>
+        <Filter/>
+      </SpaceWrapper>
+      <SpaceWrapper>
+        <ProductList limit={16}/>
+      </SpaceWrapper>
+
       {/* <Track/> */}
       {/* <Testimonial/> */}
     </div>
