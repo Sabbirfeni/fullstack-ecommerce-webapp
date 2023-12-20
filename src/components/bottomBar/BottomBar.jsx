@@ -59,7 +59,7 @@ function BottomBar() {
 
                     {/* dashboard item will show if user is admin */}
                     {isAdmin && (
-                        <Link to='/dashboard' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+                        <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
                     )}
                     
                     

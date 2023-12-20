@@ -25,13 +25,7 @@ export default function Modal({ orderInfo, handleOnChange, handleBuy }) {
     return (
         <>
             <div className=" text-center rounded-lg text-white font-bold">
-                <button
-                    type="button"
-                    onClick={openModal}
-                    className="w-full bg-violet-600 py-2 text-center rounded-lg text-white font-bold bg-green-600"
-                >
-                    Buy Now
-                </button>
+            <button className='w-full bg-[#000] text-[#fff] py-2 rounded-md mt-5' onClick={openModal}>Order now</button>
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
@@ -59,7 +53,7 @@ export default function Modal({ orderInfo, handleOnChange, handleBuy }) {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl p-2  text-left align-middle shadow-xl transition-all bg-gray-50">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md p-2  text-left align-middle shadow-xl transition-all bg-gray-50">
 
                                     <section className="">
                                         <div className="flex flex-col items-center justify-center py-8 mx-auto  lg:py-0">
@@ -93,7 +87,11 @@ export default function Modal({ orderInfo, handleOnChange, handleBuy }) {
                                                     <button onClick={e => {
                                                         handleBuy(e)
                                                         closeModal()
-                                                    }} type="submit" className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 ">Order Now</button>
+                                                    }} type="submit" className='w-full bg-[#000] text-[#fff] py-2 rounded-md mt-5'>Confirm order</button>
+                                                    {/* <button onClick={e => {
+                                                        handleBuy(e)
+                                                        closeModal()
+                                                    }} type="submit" className="focus:outline-none w-full text-white bg-violet-600 bg-green-600 hover:bg-violet-800  outline-0 font-medium rounded-lg text-sm px-5 py-2.5 ">Order Now</button> */}
                                                 </div>
                                             </div>
                                         </div>

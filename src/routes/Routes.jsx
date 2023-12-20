@@ -7,6 +7,11 @@ import ProductInfo from "../pages/productInfo/ProductInfo";
 import AddProduct from "../pages/admin/pages/AddProduct";
 import UpdateProduct from "../pages/admin/pages/UpdateProduct";
 import { PrivateRouteForAdmin, PrivateRouteForUser } from "./PrivateRoutes";
+import DashboardLayout from "../components/layout/DashboardLayout";
+import TestingDashboad from "../pages/admin/TestingDashboad";
+import TotalProducts from "../pages/admin/pages/TotalProducts";
+import TotalOrders from "../pages/admin/pages/TotalOrders";
+import TotalUsers from "../pages/admin/pages/TotalUsers";
 
 const router = createBrowserRouter([
     {
@@ -37,9 +42,28 @@ const router = createBrowserRouter([
                 path: '/dashboard',
                 element: (
                         <PrivateRouteForAdmin>
-                            <Dashboard/>
+                            <DashboardLayout/>
                         </PrivateRouteForAdmin>
                     )
+                ,
+                children: [
+                    {
+                        path: 'overview',
+                        element: <TestingDashboad/>
+                    },
+                    {
+                        path: 'all-products',
+                        element: <TotalProducts/>
+                    },
+                    {
+                        path: 'all-orders',
+                        element: <TotalOrders/>
+                    },
+                    {
+                        path: 'all-users',
+                        element: <TotalUsers/>
+                    }
+                ]
             },
             {
                 path: '/productinfo/:id',

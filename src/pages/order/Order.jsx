@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import MyContext from '../../context/data/myContext'
 import Loader from '../../components/loader/Loader';
+import { product1 } from '../../assets/images';
+import { Link } from 'react-router-dom';
 function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid;
   const context = useContext(MyContext);
@@ -14,13 +16,49 @@ function Order() {
 
   if(orders.length > 0) {
     return (
-      <>
-          <div className=" h-full pt-10">
-            {
+
+          <div className='cart-item-container w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2 md:gap-3'>
+            {orders.filter(obj => obj.userid == userid).map((order, index) => {
+
+              return ( 
+                <>
+                  {
+                    order.orderItem.map(item => {
+                      const { id, title, description, price, imageUrl } = item
+                      return (
+                        <Link to={`/productinfo/${id}`} key={id} className='cart-item w-full flex rounded-md overflow-hidden'>
+                            <img src={imageUrl} alt="product-image" className="w-28 lg:w-40 object-cover" />
+                            <div className="flex w-full justify-between px-3 py-4">
+                              <div className="">
+                                <h2 className="text-md font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>{title}</h2>
+                                <h2 className="text-xs md:text-sm my-2" style={{ color: mode === 'dark' ? 'white' : '' }}>{description.length > 50 ? description.slice(0, 50) : description}</h2>
+                                <h2 className="text-md font-bold mt-2" style={{ color: mode === 'dark' ? 'white' : '' }}>$ {price}</h2>
+                              </div>
+                            </div>
+                        </Link>
+                      )
+                    })
+                  }
+                </>
+              )
+            })} 
+          </div>
+    )
+  } else {
+    return (
+      <h2 className=' text-center tex-2xl text-white'>No order found</h2>
+    )
+  }
+}
+
+export default Order
+
+
+{/* {
               orders.filter(obj => obj.userid == userid).map((order, index) => {
                 // order.cartItems.map()
                 return (
-                  <div key={index} className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                  <div key={index} className="">
                     {
                       order.orderItem.map((item, index) => {
                         return (
@@ -42,15 +80,4 @@ function Order() {
                   </div>
                 )
               })
-            }
-          </div>
-        </>
-    )
-  } else {
-    return (
-      <h2 className=' text-center tex-2xl text-white'>Not Order</h2>
-    )
-  }
-}
-
-export default Order
+            } */}
