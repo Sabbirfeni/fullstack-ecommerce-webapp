@@ -12,6 +12,7 @@ import TestingDashboad from "../pages/admin/TestingDashboad";
 import TotalProducts from "../pages/admin/pages/TotalProducts";
 import TotalOrders from "../pages/admin/pages/TotalOrders";
 import TotalUsers from "../pages/admin/pages/TotalUsers";
+import Overview from "../pages/admin/dashboard/overview/Overview";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: 'overview',
-                        element: <TestingDashboad/>
+                        element: <Overview/>
                     },
                     {
                         path: 'all-products',
