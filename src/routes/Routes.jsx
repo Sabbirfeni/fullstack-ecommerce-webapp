@@ -12,7 +12,7 @@ import TestingDashboad from "../pages/admin/TestingDashboad";
 import TotalProducts from "../pages/admin/pages/TotalProducts";
 import TotalOrders from "../pages/admin/pages/TotalOrders";
 import TotalUsers from "../pages/admin/pages/TotalUsers";
-import Overview from "../pages/admin/dashboard/overview/Overview";
+import Overview from "../pages/admin/pages/overview/Overview";
 
 const router = createBrowserRouter([
     {
@@ -63,29 +63,22 @@ const router = createBrowserRouter([
                     {
                         path: 'all-users',
                         element: <TotalUsers/>
-                    }
+                    },
+                    {
+                        path: 'updateproduct',
+                        element: <UpdateProduct/>
+                    },
+                    {
+                        path: 'addproduct',
+                        element: <AddProduct/>
+                    },
                 ]
             },
             {
                 path: '/productinfo/:id',
                 element: <ProductInfo/>
             },
-            {
-                path: '/addproduct',
-                element: (
-                    <PrivateRouteForAdmin>
-                        <AddProduct/>
-                    </PrivateRouteForAdmin>
-                )
-            },
-            {
-                path: '/updateproduct',
-                element: (
-                    <PrivateRouteForAdmin>
-                        <UpdateProduct/>
-                    </PrivateRouteForAdmin>
-                )
-            },
+           
             {
                 path: '/*',
                 element: <NoPage/>

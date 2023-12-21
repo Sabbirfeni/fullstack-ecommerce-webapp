@@ -1,20 +1,24 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import myContext from '../../context/data/myContext'
 import { cart, logo } from '../../assets/images'
 import { useSelector } from 'react-redux'
 import './navbar.css'
 import { Avatar } from '@mui/material'
+import { HiBars3 } from "react-icons/hi2";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
   const context = useContext(myContext)
-  const { toggleMode, mode } = context
+  const { toggleMode, mode, setMobileMenuOpen } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const cartItems = useSelector(state => state.cart)
   const navigate = useNavigate()
   const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
+  const location = useLocation()
+  const isDashboard = location.pathname.includes('/dashboard')
+  const showBar = isAdmin && isDashboard;
 
   const logout = () => {
     if(!confirm('Are you sure!')) return 
@@ -47,13 +51,23 @@ export default function Navbar() {
 
 
           {/* cart */}
-          <div className='block lg:hidden'>
+          <div className='flex lg:hidden gap-3 md:gap-5'>
             <Link to='/cart' className='relative'>
               {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#000]'>{cartItems.length}</div>}
               <img src={cart} className='w-5' alt="cart" />
             </Link>
+            {
+              showBar && (
+                <button className='text-xl' onClick={() => setMobileMenuOpen(state => !state)}>
+                  <HiBars3/>
+                </button>
+              )
+            }
           </div>
+          
         </div>
+
+       
 
         <div className='navbar-right hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
 
@@ -72,6 +86,8 @@ export default function Navbar() {
               <img src={cart} className='w-5' alt="cart" />
             </Link>
           </div>
+
+          
 
           {
             !user && (
@@ -97,11 +113,10 @@ export default function Navbar() {
             <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
               
               <div className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
-                <Link onClick={handleProfileMenu} className='hover:bg-gray-200 pt-3 py-1.5 px-3 rounded-t-md'>Profile</Link>
 
                 {/* dashboard item will show if user is admin */}
                 {isAdmin && (
-                  <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+                  <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Dashboard</Link>
                 )}
                 
                 

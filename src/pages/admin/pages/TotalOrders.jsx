@@ -21,9 +21,9 @@ function TotalOrders() {
 
   return (
     <DataTable title='All user'>
-    <div class="data-table relative overflow-x-auto rounded-md">
-        <table class="w-full text-sm text-left rtl:text-right">
-            <thead class="text-xs uppercase bg-[#ececec]">
+    <div className="data-table relative overflow-x-auto rounded-md">
+        <table className="w-full text-sm text-left rtl:text-right">
+            <thead className="text-xs uppercase bg-[#ececec]">
               <tr>
                 <th scope="col" className="px-6 py-3">
                     S.No
@@ -66,32 +66,32 @@ function TotalOrders() {
                             const { title, price, catergory, imageUrl } = item
                             return (
 
-                                <tr key={`${orderIndex}`} class="bg-white border-b ">
-                                  <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap ">
+                                <tr key={`${orderIndex}`} className="bg-white border-b ">
+                                  <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap ">
                                     {orderSerial}
                                   </th>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                     <img className='w-16' src={imageUrl} alt="img" />
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {title}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   ₹{price}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {catergory}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {fullName}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {address}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {email}
                                   </td>
-                                  <td class="px-6 py-4">
+                                  <td className="px-6 py-4">
                                   {date}
                                   </td>
                                 </tr>  )

@@ -9,9 +9,9 @@ function TotalUsers() {
   return (
     
     <DataTable title='All user'>
-    <div class="data-table relative overflow-x-auto rounded-md">
-        <table class="w-full text-sm text-left rtl:text-right">
-            <thead class="text-xs uppercase bg-[#ececec]">
+    <div className="data-table relative overflow-x-auto rounded-md">
+        <table className="w-full text-sm text-left rtl:text-right">
+            <thead className="text-xs uppercase bg-[#ececec]">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     S.No
@@ -34,17 +34,17 @@ function TotalUsers() {
               const { name, uid, email } = item
         
                     return (
-                        <tr key={`${email}-${index}`} class="bg-white border-b ">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap ">
+                        <tr key={`${email}-${index}`} className="bg-white border-b ">
+                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap ">
                             {index + 1}
                             </th>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 {name}
                             </td>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                             {email}
                             </td>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                             {uid}
                             </td>
                         </tr>  

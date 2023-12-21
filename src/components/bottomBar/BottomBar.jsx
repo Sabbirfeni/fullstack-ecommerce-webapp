@@ -55,11 +55,10 @@ function BottomBar() {
                     {!user && <Link to='/signup' onClick={handleProfileMenu} className='hover:bg-gray-200 pt-3 py-1.5 px-3 rounded-t-md'>Signup</Link>}
                     {!user && <Link to='/login' onClick={handleProfileMenu} className='hover:bg-gray-200 pb-3 py-1.5 px-3 rounded-t-md'>Login</Link>}
 
-                    {user && <Link onClick={handleProfileMenu} className='hover:bg-gray-200 pt-3 py-1.5 px-3 rounded-t-md'>Profile</Link>}
 
                     {/* dashboard item will show if user is admin */}
                     {isAdmin && (
-                        <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+                        <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Dashboard</Link>
                     )}
                     
                     

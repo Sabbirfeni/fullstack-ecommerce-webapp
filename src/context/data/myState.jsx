@@ -19,6 +19,7 @@ function MyState(props) {
   }
 
   const [ loading, setLoading ] = useState(false);
+  const [ mobileMenuOpen, setMobileMenuOpen ] = useState(false)
 
   const [ products, setProducts ] = useState({
     title: '',
@@ -97,7 +98,7 @@ function MyState(props) {
       await setDoc(docRef, products)
       toast.success('Product updated')
       setTimeout(() => {
-        window.location.href = '/dashboard'
+        window.location.href = '/dashboard/all-products'
       }, 800)
       getProductData()
       setLoading(false)
@@ -177,7 +178,9 @@ function MyState(props) {
 
   const values = { 
     mode, 
-    toggleMode, 
+    toggleMode,
+    mobileMenuOpen,
+    setMobileMenuOpen,
     loading, 
     setLoading, 
     products, 
