@@ -1,11 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MyContext from '../../../context/data/myContext'
+import { Timestamp } from 'firebase/firestore';
 
 function AddProduct() {
 
     const context = useContext(MyContext);
     const { products, setProducts, addProduct, loading } = context;
 
+    useEffect(() => {
+        setProducts({
+            title: '',
+            price: '',
+            imageUrl: '',
+            catergory: '',
+            description: '',
+            time: Timestamp.now(),
+            date: new Date().toLocaleString('en-US', {
+              month: 'short',
+              day: '2-digit',
+              year: 'numeric'
+            })
+          })
+    }, [])
 
     return (
         // <div>
@@ -71,7 +87,7 @@ function AddProduct() {
         // </div>
         <div className='flex justify-center items-center'>
         <div className="form-container flex flex-col">
-            <p className="title mb-5">Update product</p>
+            <p className="title mb-5">Add new product</p>
             <form className="sign-form">
                 <div className="flex flex-col md:flex-row gap-2">
                     <input type="text"
@@ -114,10 +130,11 @@ function AddProduct() {
                    </textarea>
 
                 <button
+                    type='submit'
                     onClick={addProduct}
                     disabled={loading}
                     className={`${loading && 'bg-gray-500 pointer-events-none'} form-btn`}>
-                    {loading ? 'Loading...' : 'Update product'}
+                    {loading ? 'Loading...' : 'Add product'}
                 </button>         
             </form>
         </div>

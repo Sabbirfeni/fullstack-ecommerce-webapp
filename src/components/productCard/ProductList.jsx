@@ -32,7 +32,7 @@ function ProductList({ limit }) {
                         const { id, title, price, description, imageUrl } = item;
                         
                         return (
-                            <Link to={`/productinfo/${id}`} key={`${title}-${id}`} className='product-card-container cursor-pointer rounded-md h-[280px] md:h-[300px] lg:h-[360px] xl:h-[400px]'>
+                            <Link to={`/productinfo/${id}`} key={`${title}-${id}`} className='product-card-container bg-[#fff] cursor-pointer rounded-md h-[280px] md:h-[300px] lg:h-[360px] xl:h-[400px]'>
                 
                                 <div className='product-img-container h-2/3 md:h-3/5'>
                                     <img src={`${imageUrl}`} alt="product-image" className='w-full h-full object-cover rounded-t-md' />

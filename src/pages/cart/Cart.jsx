@@ -113,7 +113,7 @@ function Cart() {
             
             return (
 
-                <div key={`${title}-${index}`} className='cart-item w-full flex rounded-md overflow-hidden'>
+                <div key={`${title}-${index}`} className='cart-item bg-[#fff] w-full flex rounded-md overflow-hidden'>
                     <img src={imageUrl} alt="product-image" className="w-28 lg:w-40 object-cover" />
                     <div className="flex w-full justify-between px-3 py-4">
                       <div className="">
@@ -133,7 +133,7 @@ function Cart() {
             )
           })}
         </div>
-        <div className='price-calculator w-full h-[fit-content] lg:w-1/3 px-3 py-4 rounded-md'>
+        <div className='price-calculator bg-[#fff] w-full h-[fit-content] lg:w-1/3 px-5 py-4 rounded-md'>
           <div className='subtotal flex items-center justify-between'>
             <p>Subtotal</p>
             <p>$ {totalAmount}</p>

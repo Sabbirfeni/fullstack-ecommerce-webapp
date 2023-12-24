@@ -11,12 +11,10 @@ import { colorTheme } from './theme/colorTheme'
 
 function App() {
   return  (
-    <MyState>
-      <ThemeProvider theme={colorTheme}>
-        <RouterProvider router={router}/>
-        <ToastContainer />
-      </ThemeProvider>
-    </MyState>
+    <ThemeProvider theme={colorTheme}>
+      <RouterProvider router={router}/>
+      <ToastContainer />
+    </ThemeProvider>
   )
 }
 

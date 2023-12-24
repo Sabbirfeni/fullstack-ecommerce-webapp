@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux'
 import './navbar.css'
 import { Avatar } from '@mui/material'
 import { HiBars3 } from "react-icons/hi2";
+import { IoClose } from "react-icons/io5";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
+
   const context = useContext(myContext)
-  const { toggleMode, mode, setMobileMenuOpen } = context
+  const { toggleMode, mode, mobileMenuOpen, setMobileMenuOpen } = context
   const user = JSON.parse(localStorage.getItem('user'));
   const cartItems = useSelector(state => state.cart)
   const navigate = useNavigate()
@@ -59,7 +61,7 @@ export default function Navbar() {
             {
               showBar && (
                 <button className='text-xl' onClick={() => setMobileMenuOpen(state => !state)}>
-                  <HiBars3/>
+                  {mobileMenuOpen ? <IoClose/> : <HiBars3/> }
                 </button>
               )
             }

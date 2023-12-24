@@ -11,7 +11,7 @@ function TotalUsers() {
     <DataTable title='All user'>
     <div className="data-table relative overflow-x-auto rounded-md">
         <table className="w-full text-sm text-left rtl:text-right">
-            <thead className="text-xs uppercase bg-[#ececec]">
+            <thead className="text-xs uppercase">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     S.No

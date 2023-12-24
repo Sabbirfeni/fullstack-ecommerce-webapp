@@ -103,7 +103,7 @@ function ProductInfo() {
                                 <span className="text-sm ml-3">4 Reviews</span>
                             </span>
                         </div>
-                        <p className="leading-relaxed text-sm border-b-2 mb-4 pb-4 pb-md-5">
+                        <p className="leading-relaxed text-sm border-b-2 border-[#fff] mb-4 pb-4 pb-md-5">
                             {productDetails[0]?.description}
                         </p>
                     

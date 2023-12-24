@@ -26,7 +26,7 @@ function Order() {
                     order.orderItem.map(item => {
                       const { id, title, description, price, imageUrl } = item
                       return (
-                        <Link to={`/productinfo/${id}`} key={id} className='cart-item w-full flex rounded-md overflow-hidden'>
+                        <Link to={`/productinfo/${id}`} key={id} className='cart-item bg-[#fff] w-full flex rounded-md overflow-hidden'>
                             <img src={imageUrl} alt="product-image" className="w-28 lg:w-40 object-cover" />
                             <div className="flex w-full justify-between px-3 py-4">
                               <div className="">

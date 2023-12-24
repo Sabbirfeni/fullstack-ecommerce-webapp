@@ -8,10 +8,10 @@ function TotalProducts() {
   const { mode, product, deleteProduct, editHandle, orders, users } = context
   return (
     
-    <DataTable title='Latest products'>
+    <DataTable title='Total products'>
       <div className="data-table relative overflow-x-auto rounded-md">
           <table className="w-full text-sm text-left rtl:text-right">
-              <thead className="text-xs uppercase bg-[#ececec]">
+              <thead className="text-xs uppercase">
                   <tr>
                       <th scope="col" className="px-6 py-3">
                           S.No

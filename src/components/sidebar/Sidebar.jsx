@@ -10,7 +10,7 @@ function Sidebar() {
 
     
   return (
-    <div className='sidebar rounded-md'>
+    <div className='sidebar bg-[#fff] rounded-md'>
         <div className='lg:flex hidden flex-col w-[240px] py-5 px-4 h-screen '>
             <div className='flex flex-col mb-4'>
                 <h4 className='text-xl font-medium logo'>Dashboard</h4>

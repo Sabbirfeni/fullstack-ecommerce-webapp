@@ -18,21 +18,21 @@ function Overview() {
   return (
     <div className='flex flex-col md:gap-3 gap-2'>
         <div className="overview-cards-container flex md:flex-row flex-col md:gap-3 gap-2">
-            <div className="overview-card flex flex-col flex-1 p-4 space-y-12 border rounded-md">
+            <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
                 <div className='flex items-center justify-between lg:text-3xl text-2xl'>
                     <h3>{users.length}</h3>
                     <div><HiOutlineUsers/></div>
                 </div>
                 <h3 className='text-xl'>Total users</h3>
             </div>
-            <div className="overview-card flex flex-col flex-1 p-4 space-y-12 border rounded-md">
+            <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
                 <div className='flex items-center justify-between lg:text-3xl text-2xl'>
                     <h3>{product.length}</h3>
                     <div><BsCartCheck/></div>
                 </div>
                 <h3 className='text-xl'>Total products</h3>
             </div>
-            <div className="overview-card flex flex-col flex-1 p-4 space-y-12 border rounded-md">
+            <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
                 <div className='flex items-center justify-between lg:text-3xl text-2xl'>
                     <h3>{totalOrders.length}</h3>
                     <div><TbTruckDelivery/></div>
@@ -44,7 +44,7 @@ function Overview() {
         <DataTable title='Latest products' shortTable={true} link='/dashboard/all-products'>
             <div class="data-table relative overflow-x-auto rounded-md">
                 <table class="w-full text-sm text-left rtl:text-right">
-                    <thead class="text-xs uppercase bg-[#ececec]">
+                    <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 S.No

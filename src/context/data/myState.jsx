@@ -7,6 +7,9 @@ import { QuerySnapshot, Timestamp, addDoc, collection, deleteDoc, doc, getDocs, 
 import { useNavigate } from 'react-router-dom';
 
 function MyState(props) {
+
+  const navigate = useNavigate();
+
   const [ mode, setMode ] = useState('light');
   const toggleMode = () => {
     if(mode == 'light') {
@@ -35,20 +38,20 @@ function MyState(props) {
     })
   })
 
-  const addProduct = async () => {
-    console.log(products)
-    if(products.title == null || products.price == null || products.imageUrl == null || products.catergory == null || products.description == null) {
-      return toast.error('All fields required!');
+  const addProduct = async (e) => {
+    e.preventDefault()
+    if(products.title == '' || products.price == '' || products.imageUrl == '' || products.catergory == '' || products.description == '') {
+      toast.error('All fields required!');
+      return 
     }
 
-    setLoading(true)
-
     try {
+      setLoading(true)
       const productRef = collection(fireDB, 'products');
       await addDoc(productRef, products)
       toast.success('Product Added.')
       setTimeout(() => {
-        window.location.href = '/dashboard'
+        navigate('/dashboard/all-products');
       }, 800)
       getProductData()
       setLoading(false)
@@ -91,14 +94,16 @@ function MyState(props) {
     setProducts(item)
   }
 
-  const updateProduct = async () => {
-    setLoading(true)
+  const updateProduct = async (e) => {
+    e.preventDefault()
+
     try {
+      setLoading(true)
       const docRef = doc(fireDB, 'products', products.id)
       await setDoc(docRef, products)
       toast.success('Product updated')
       setTimeout(() => {
-        window.location.href = '/dashboard/all-products'
+        navigate('/dashboard/all-products');
       }, 800)
       getProductData()
       setLoading(false)
