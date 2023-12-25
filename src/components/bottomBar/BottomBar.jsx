@@ -5,7 +5,7 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { Avatar } from '@mui/material'
-import './BottomBar.css'
+import './bottomBar.css'
 function BottomBar() {
     const user = JSON.parse(localStorage.getItem('user'));
     const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
