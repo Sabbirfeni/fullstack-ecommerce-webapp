@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { Link } from 'react-router-dom'
 import ProductList from '../../components/productCard/ProductList'
-import SpaceWrapper from '../../wrapper/productListWrapper/spaceWrapper'
+import SpaceWrapper from '../../wrapper/productListWrapper/SpaceWrapper'
 
 function AllProducts() {
   const context = useContext(myContext)
