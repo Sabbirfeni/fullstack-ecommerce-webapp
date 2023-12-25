@@ -6,8 +6,6 @@ import Loader from '../../components/loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { toast } from 'react-toastify'
-import ProductList from '../../components/productCard/ProductList'
-import SpaceWrapper from '../../wrapper/productListWrapper/spaceWrapper'
 
 function ProductInfo() {
     const { id } = useParams()
