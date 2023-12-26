@@ -49,7 +49,7 @@ function MyState(props) {
       setLoading(true)
       const productRef = collection(fireDB, 'products');
       await addDoc(productRef, products)
-      toast.success('Product Added.')
+      toast.success('new product added.')
       setTimeout(() => {
         navigate('/dashboard/all-products');
       }, 800)
@@ -101,7 +101,7 @@ function MyState(props) {
       setLoading(true)
       const docRef = doc(fireDB, 'products', products.id)
       await setDoc(docRef, products)
-      toast.success('Product updated')
+      toast.success('product updated.')
       setTimeout(() => {
         navigate('/dashboard/all-products');
       }, 800)
@@ -119,7 +119,7 @@ function MyState(props) {
     try {
       const docRef = doc(fireDB, 'products', item.id)
       await deleteDoc(docRef)
-      toast.warning('Product deleted')
+      toast.info('product deleted.')
       getProductData()
       setLoading(false)
     } catch(err) {

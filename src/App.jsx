@@ -13,7 +13,18 @@ function App() {
   return  (
     <ThemeProvider theme={colorTheme}>
       <RouterProvider router={router}/>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </ThemeProvider>
   )
 }

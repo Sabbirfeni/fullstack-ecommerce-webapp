@@ -42,7 +42,7 @@ function Cart() {
     e.preventDefault()
 
     if(fullName == '' && address == '' && cardNo == '' && cardExpDate == '' && code == '') {
-      toast.warning('Please enter all field')
+      toast.info('please enter all field')
       return
     }
 
@@ -72,7 +72,7 @@ function Cart() {
       })
       setOrders(orderArray)
       navigate('/order')
-      toast.success('Order successfully completed!')
+      toast.success('order completed!')
     } catch(err) {
       console.log(err)
     }
@@ -80,7 +80,7 @@ function Cart() {
 
   const deleteCart = item => {
     dispatch(deleteFromCart(item))
-    toast.warning('Cart deleted')
+    toast.info('product deleted from cart.')
   }
 
   useEffect(() => {
