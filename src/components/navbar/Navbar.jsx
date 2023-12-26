@@ -11,12 +11,19 @@ import { IoClose } from "react-icons/io5";
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
+  const navigate = useNavigate()
 
   const context = useContext(myContext)
-  const { toggleMode, mode, mobileMenuOpen, setMobileMenuOpen } = context
+  const { toggleMode, mode, mobileMenuOpen, setMobileMenuOpen, setSearchKey } = context
+  const [ searchValue, setSearchValue ] = useState('')
+  const getSearchItems = e => {
+    e.preventDefault()
+    navigate('/allproducts')
+    setSearchKey(searchValue)
+  }
   const user = JSON.parse(localStorage.getItem('user'));
   const cartItems = useSelector(state => state.cart)
-  const navigate = useNavigate()
+
   const isAdmin = user?.user?.email === 'sabbirholybangla@gmail.com';
   const location = useLocation()
   const isDashboard = location.pathname.includes('/dashboard')
@@ -45,8 +52,11 @@ export default function Navbar() {
 
           {/* search bar */}
           <div className='relative'>
-            <input className="search-input" name="text" type="text" placeholder="Search product"/>
-            <svg className='absolute sm:top-3 top-2.5 right-3 w-4 cursor-pointer' fill="#000000"  viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <form onSubmit={(e) => getSearchItems(e)} action="">
+              <input className="search-input" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} name="text" type="text" placeholder="Search product"/>
+            </form>
+            
+            <svg onClick={(e) => getSearchItems(e)} className='absolute sm:top-3 top-2.5 right-3 w-4 cursor-pointer' fill="#000000"  viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
               <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fillRule="evenodd"></path>
             </svg>
           </div>

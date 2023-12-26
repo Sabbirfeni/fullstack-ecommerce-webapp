@@ -21,7 +21,12 @@ function ProductInfo() {
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItem))
     }, [cartItem])
-    
+
+    useEffect(() => {
+        // scroll to top on page load
+        window.scrollTo({top: 0, left: 0});
+      }, []);
+
     if(loading) {
         return <Loader/>
     }

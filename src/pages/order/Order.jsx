@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MyContext from '../../context/data/myContext'
 import Loader from '../../components/loader/Loader';
 import { product1 } from '../../assets/images';
@@ -9,6 +9,11 @@ function Order() {
   const { mode, loading, orders } = context;
   console.log(orders)
   // debugger
+
+  useEffect(() => {
+    // scroll to top on page load
+    window.scrollTo({top: 0, left: 0});
+  }, []);
   
   if(loading) {
     return <Loader/>

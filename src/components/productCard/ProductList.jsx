@@ -35,7 +35,7 @@ function ProductList({ limit }) {
                         
                         return (
 
-                            <div className='bg-[#fff] rounded-md product-card-container'>
+                            <div key={id} className='bg-[#fff] rounded-md product-card-container'>
                                 <Link to={`/productinfo/${id}`}>
                                     <div className='h-44 lg:h-52 2xl:h-52 overflow-hidden'>
                                         <img src={`${imageUrl}`} alt="product-image" className='product-img w-full h-full object-cover rounded-t-md' />
