@@ -101,7 +101,7 @@ function ProductInfo() {
                                 <span className="text-sm ml-3">4 Reviews</span>
                             </span>
                         </div>
-                        <p className="leading-relaxed text-sm border-b-2 border-[#fff] mb-4 pb-4 pb-md-5">
+                        <p className="leading-relaxed text-sm border-b-2 border-[#f1f1f1] mb-4 pb-4 pb-md-5">
                             {productDetails[0]?.description}
                         </p>
                     
@@ -109,7 +109,7 @@ function ProductInfo() {
                             <span className="title-font font-bold text-2xl">
                                 ${productDetails[0]?.price}
                             </span>
-                            <button onClick={() => addCart(productDetails[0])} className="addto-card-btn px-4 py-3 text-sm text-[#000] hover:bg-[#000] hover:text-[#fff] rounded-sm z-50">
+                            <button onClick={() => addCart(productDetails[0])} className="px-4 py-3 text-sm text-[#fff] hover:text-[#000] bg-[#000] transition hover:bg-[#e2e8f0]  rounded-sm z-50">
                                 Add To Cart
                             </button>
                         </div>

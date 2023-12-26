@@ -114,11 +114,11 @@ export default function Navbar() {
           <div className='cursor-pointer relative'>
             <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
               
-              <div className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+              <div className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
 
                 {/* dashboard item will show if user is admin */}
                 {isAdmin && (
-                  <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Dashboard</Link>
+                  <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
                 )}
                 
                 
@@ -131,7 +131,7 @@ export default function Navbar() {
                       handleProfileMenu();
                       logout()
                     }} 
-                    className='hover:bg-gray-200 pb-3 py-1.5 px-3 rounded-b-md'
+                    className='hover:bg-gray-200 py-1.5 px-3'
                   >
                       Logout
                   </Link>

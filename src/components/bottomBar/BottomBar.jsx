@@ -50,15 +50,15 @@ function BottomBar() {
                 </div>
 
                 {/* Profile menu items */}
-                <div className={`menu-container absolute ${isAdmin ? '-top-36' : user ? '-top-28' : '-top-20'}  right-1 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+                <div className={`menu-container absolute ${isAdmin ? '-top-28' : user ? '-top-20' : '-top-20'}  right-1 z-50 py-1.5 ${profileMenuOpen ? 'flex' : 'hidden'} flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
                     
-                    {!user && <Link to='/signup' onClick={handleProfileMenu} className='hover:bg-gray-200 pt-3 py-1.5 px-3 rounded-t-md'>Signup</Link>}
-                    {!user && <Link to='/login' onClick={handleProfileMenu} className='hover:bg-gray-200 pb-3 py-1.5 px-3 rounded-t-md'>Login</Link>}
+                    {!user && <Link to='/signup' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Signup</Link>}
+                    {!user && <Link to='/login' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Login</Link>}
 
 
                     {/* dashboard item will show if user is admin */}
                     {isAdmin && (
-                        <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3 rounded-t-md'>Dashboard</Link>
+                        <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
                     )}
                     
                     
@@ -71,7 +71,7 @@ function BottomBar() {
                                 handleProfileMenu();
                                 logout()
                             }} 
-                            className='hover:bg-gray-200 pb-3 py-1.5 px-3 rounded-b-md'
+                            className='hover:bg-gray-200 py-1.5 px-3'
                         >
                             Logout
                         </Link>
