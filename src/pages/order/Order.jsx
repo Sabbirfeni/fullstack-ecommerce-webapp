@@ -7,7 +7,6 @@ function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid;
   const context = useContext(MyContext);
   const { mode, loading, orders } = context;
-  console.log(orders)
   // debugger
 
   useEffect(() => {
@@ -24,27 +23,29 @@ function Order() {
 
           <div className='cart-item-container w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2 md:gap-3'>
             {orders.filter(obj => obj.userid == userid).map((order, index) => {
-
               return ( 
-                <>
+                <div key={index}>
                   {
-                    order.orderItem.map(item => {
-                      const { id, title, description, price, imageUrl } = item
+                    order.orderItem.map((item, index) => {
+                      const { productId, title, description, price, imageUrl } = item
                       return (
-                        <Link to={`/productinfo/${id}`} key={id} className='cart-item bg-[#fff] w-full flex rounded-md overflow-hidden'>
+                        <Link to={`/productinfo/${productId}`} key={`${index}`} className='cart-item bg-[#fff] w-full flex rounded-md overflow-hidden'>
                             <img src={imageUrl} alt="product-image" className="w-28 lg:w-40 object-cover" />
                             <div className="flex w-full justify-between px-3 py-4">
                               <div className="">
                                 <h2 className="text-md font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>{title}</h2>
                                 <h2 className="text-xs md:text-sm my-2" style={{ color: mode === 'dark' ? 'white' : '' }}>{description.length > 50 ? description.slice(0, 50) : description}</h2>
-                                <h2 className="text-md font-bold mt-2" style={{ color: mode === 'dark' ? 'white' : '' }}>$ {price}</h2>
+                                <div className='flex items-center justify-between mt-2'>
+                                  <h2 className="text-md font-bold" >$ {price}</h2>
+                                  <h2 className="text-xs text-orange-500">Processing</h2>
+                                </div>
                               </div>
                             </div>
                         </Link>
                       )
                     })
                   }
-                </>
+                </div>
               )
             })} 
           </div>

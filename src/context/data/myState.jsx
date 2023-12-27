@@ -76,7 +76,7 @@ function MyState(props) {
       const data = onSnapshot(q, (QuerySnapshot) => {
         let productArray = []
         QuerySnapshot.forEach(doc => {
-          productArray.push({ ...doc.data(), id: doc.id })
+          productArray.push({ ...doc.data(), productId: doc.id })
         })
         setProduct(productArray)
         setLoading(false)
@@ -136,9 +136,10 @@ function MyState(props) {
       const result = await getDocs(collection(fireDB, 'orders'))
       const orderArray = [];
       result.forEach(doc => {
-        orderArray.push(doc.data())
+        orderArray.push({...doc.data(), orderId: doc.id})
         setLoading(false)
       })
+      console.log(orderArray)
       setOrders(orderArray)
       setLoading(false)
     } catch(err) {

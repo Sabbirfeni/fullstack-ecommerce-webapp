@@ -44,7 +44,7 @@ function Sidebar() {
         </div>
         
         <div className={`fixed z-10 top-0 h-screen w-2/3 bg-gradient-to-tl from-[#e9e9e9] to-[#aca5df] backdrop-blur-lg p-6 lg:hidden
-            smooth-transition ${mobileMenuOpen ? 'left-0' : '-left-full'}`}>
+            transition duration-200 ${mobileMenuOpen ? 'left-0 opacity-100' : '-left-full opacity-0'}`}>
             <div className='mt-14'>
                 <NavLink to='/dashboard/overview' onClick={() => setMobileMenuOpen(false)} style={({ isActive }) => (
                     isActive ? { background: '#000', color: '#fff' } : { background: '', color: '#000' }
@@ -65,6 +65,11 @@ function Sidebar() {
                     isActive ? { background: '#000', color: '#fff' } : { background: '', color: '#000' }
                 )} className='flex flex-row justify-start items-center text-sm font-medium py-3 px-4 my-1 rounded-md hover:bg-[#e0e0e0]'>
                     Total orders
+                </NavLink>
+                <NavLink to='/dashboard/addproduct' onClick={() => setMobileMenuOpen(false)} style={({ isActive }) => (
+                    isActive ? { background: '#000', color: '#fff' } : { background: '', color: '#000' }
+                )} className='flex flex-row justify-start items-center text-sm font-medium py-3 px-4 my-1 rounded-md hover:bg-[#e0e0e0]'>
+                    Add product
                 </NavLink>
             </div>
             

@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function NoPage() {
+
+  useEffect(() => {
+    // scroll to top on page load
+    window.scrollTo({top: 0, left: 0});
+  }, []);
+
   return (
-    <div>NoPage</div>
+    <div>No page found</div>
   )
 }
 

@@ -15,15 +15,17 @@ function Cart() {
   // cart
   const context = useContext(myContext)
   const { mode, setOrders, setLoading } = context;
+
   const cartItem = useSelector(state => state.cart)
   const user = JSON.parse(localStorage.getItem('user')) 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const descriptionTest = 'description description description description description description description description description description description description description description description ' 
+  let [isModelOpen, setIsModelOpen] = useState(false)
   // All the values of fakepay form (order form)
   const [ addressInfo, setAddressInfo ] = useState({
     fullName: '',
     address: '',
+    phone: '',
     cardNo: '',
     cardExpDate: '',
     code: ''
@@ -38,41 +40,65 @@ function Cart() {
 
   const handleBuy = async e => {
 
-    const { fullName, address, cardNo, cardExpDate, code } = addressInfo
+    const { fullName, address, phone, cardNo, cardExpDate, code } = addressInfo
     e.preventDefault()
 
-    if(fullName == '' && address == '' && cardNo == '' && cardExpDate == '' && code == '') {
+    if(fullName == '' || address == '' || phone == '' || cardNo == '' || cardExpDate == '' || code == '') {
       toast.info('please enter all field')
       return
     }
 
-    const userid = JSON.parse(localStorage.getItem('user')).user.uid
-    const userInfoWithOrder = {
-      orderItem: cartItem,
-      addressInfo,
-      date: new Date().toLocaleString("en-US", {
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric'
-      }),
-      email: JSON.parse(localStorage.getItem('user')).user.email,
-      userid,
-      paymentId: userid.slice(0, 8)
+    if(phone.length !== 11) {
+      toast.info('phone must be 11 digit.')
+      return
     }
 
+    const userid = JSON.parse(localStorage.getItem('user')).user.uid
+    const orderItems = []
+    cartItem.forEach(item => {
+      const { catergory, description, imageUrl, price, productId } = item
+      const orderInfo = {
+        catergory,
+        description,
+        imageUrl,
+        price,
+        productId,
+        fullName,
+        address,
+        phone,
+        cardNo,
+        cardExpDate,
+        code,
+        orderStatus: 'processing',
+        date: new Date().toLocaleString("en-US", {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric'
+        }),
+        email: JSON.parse(localStorage.getItem('user')).user.email,
+        userid,
+        paymentId: userid.slice(0, 8)
+      }
+      orderItems.push(orderInfo)
+    })
+    const orderArray = [];
     try {
-      const docRef = collection(fireDB, 'orders')
-      await addDoc(docRef, userInfoWithOrder)
+      orderItems.forEach(async orderData => {
+        const docRef = collection(fireDB, 'orders')
+        await addDoc(docRef, orderData)
+  
+        const orders = await getDocs(collection(fireDB, 'orders'))
 
-      const orders = await getDocs(collection(fireDB, 'orders'))
-      const orderArray = [];
-      orders.forEach(doc => {
-        orderArray.push(doc.data())
-        setLoading(false)
+        orders.forEach(doc => {
+          orderArray.push(doc.data())
+        })
       })
+
       setOrders(orderArray)
       navigate('/order')
       toast.success('order completed!')
+      setLoading(false)
+      setIsModelOpen(false)
     } catch(err) {
       console.log(err)
     }
@@ -149,7 +175,7 @@ function Cart() {
             <p className='font-bold'>$ {groundTotal}</p>
           </div>
           
-          <Modal orderInfo={addressInfo} handleOnChange={fakePayOnChange} handleBuy={handleBuy} />
+          <Modal orderInfo={addressInfo} handleOnChange={fakePayOnChange} handleBuy={handleBuy} isOpen={isModelOpen} setIsOpen={setIsModelOpen}/>
         </div>
         
       </div>

@@ -13,25 +13,25 @@ function TotalProducts() {
           <table className="w-full text-sm text-left rtl:text-right">
               <thead className="text-xs uppercase">
                   <tr>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           S.No
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Image
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Title
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Price
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Category
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Date
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="p-3">
                           Action
                       </th>
                   </tr>
@@ -43,25 +43,25 @@ function TotalProducts() {
           
                       return (
                           <tr key={`${time}`} className="bg-white border-b ">
-                              <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap ">
+                              <td scope="row" className="p-3 font-medium whitespace-nowrap ">
                               {index + 1}
-                              </th>
-                              <td className="px-6 py-4">
+                              </td>
+                              <td className="p-3">
                                   <img className='w-16' src={imageUrl} alt="img" />
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="p-3">
                               {title}
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="p-3">
                               {price}/-
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="p-3">
                               { catergory }
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="p-3">
                               { date }
                               </td>
-                              <td className="px-6 py-4">
+                              <td className="p-3">
                               <div className=" flex gap-2">
                                       <div className=" flex gap-2 cursor-pointer text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
                                           <div onClick={() => deleteProduct(item)} >
