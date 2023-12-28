@@ -12,9 +12,9 @@ function Overview() {
     const context = useContext(MyContext)
     const { mode, product, deleteProduct, editHandle, orders, users } = context
     const totalOrders = []
-    orders.map(order => order.orderItem.map(item => {
-        totalOrders.push(item)
-    }))
+    orders.map(order => {
+        totalOrders.push(order)
+    })
   return (
     <div className='flex flex-col md:gap-3 gap-2'>
         <div className="overview-cards-container flex md:flex-row flex-col md:gap-3 gap-2">

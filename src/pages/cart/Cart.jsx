@@ -81,19 +81,18 @@ function Cart() {
       }
       orderItems.push(orderInfo)
     })
-    const orderArray = [];
+    
     try {
       orderItems.forEach(async orderData => {
         const docRef = collection(fireDB, 'orders')
         await addDoc(docRef, orderData)
-  
-        const orders = await getDocs(collection(fireDB, 'orders'))
-
-        orders.forEach(doc => {
-          orderArray.push(doc.data())
-        })
       })
 
+      const orderArray = [];
+      const orders = await getDocs(collection(fireDB, 'orders'))
+      orders.forEach(doc => {
+        orderArray.push(doc.data())
+      })
       setOrders(orderArray)
       navigate('/order')
       toast.success('order completed!')
