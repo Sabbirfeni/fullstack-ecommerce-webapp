@@ -36,7 +36,7 @@ function Order() {
                           <h2 className="text-xs md:text-sm" style={{ color: mode === 'dark' ? 'white' : '' }}>{description.length > 50 ? description.slice(0, 50) : description}</h2>
                           <div className='flex items-center justify-between absolute bottom-0 w-full mt-3'>
                             <h2 className="text-xs md:text-md font-bold">$ {price}</h2>
-                            <h2 className={`text-xs text-orange-500 ${orderStatus == 'delivering' && 'text-[#42ca30]'}`}>{orderStatus}</h2>
+                            <h2 className={`text-xs  ${orderStatus == 'delivering' ? 'text-[#42ca30]' : orderStatus == 'completed' ? 'text-[#fff] bg-[#42ca30] py-0.5 px-2 rounded-sm' : 'text-orange-500'}`}>{orderStatus}</h2>
                           </div>
                         </div>
                       </div>

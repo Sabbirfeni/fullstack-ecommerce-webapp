@@ -3,7 +3,7 @@ import myContext from '../../context/data/myContext';
 import Layout from '../../components/layout/Layout';
 import Modal from '../../components/modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteFromCart } from '../../redux/cartSlice';
+import { deleteFromCart, resetCart } from '../../redux/cartSlice';
 import { toast } from 'react-toastify';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { fireDB } from '../../firebase/FirebaseConfig';
@@ -94,10 +94,13 @@ function Cart() {
         orderArray.push(doc.data())
       })
       setOrders(orderArray)
-      navigate('/order')
+      
       toast.success('order completed!')
+      localStorage.removeItem('cart')
+      dispatch(resetCart())
       setLoading(false)
       setIsModelOpen(false)
+      navigate('/order')
     } catch(err) {
       console.log(err)
     }

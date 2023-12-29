@@ -10,7 +10,7 @@ function TotalOrders() {
   const context = useContext(MyContext)
   const { mode, product, deleteProduct, editHandle, orders, setOrders, users } = context
   const [ loading, setLoading ] = useState(false)
-  const setOrderStatus = async (status, orderId, productId) => {
+  const setOrderStatus = async (status, orderId) => {
 
     setLoading(true)
     try {
@@ -101,18 +101,24 @@ function TotalOrders() {
                         <td className="p-3">
                         <div className=" flex gap-2">
                                 <div className=" flex gap-2 cursor-pointer text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                    <div onClick={() => setOrderStatus('delivering', orderId, productId)} >
-                                        <button className={`bg-[#000] text-[#fff] text-xs px-2 py-1 rounded-sm cursor-pointer ${loading ? 'cursor-none' : 'cursor-pointer'}`}>
-                                            {orderStatus == 'delivering' && 'delivering'}
-                                            {orderStatus == 'processing' && 'processing'}
-                                        </button>
-                                    </div>
-                                    <Link to={'/dashboard/updateproduct'}>
-                                        <div onClick={() => editHandle(item)}>
-                                            <button className='bg-[#000] text-[#fff] text-xs px-2 py-1 rounded-sm'>Mark as complete</button>
+                                    {orderStatus == 'completed' ? null :
+                                        <div onClick={() => setOrderStatus('delivering', orderId)} >
+                                            <button className={`bg-[#000] text-[#fff] text-xs px-2 py-1 rounded-sm cursor-pointer ${loading ? 'cursor-none' : 'cursor-pointer'}`}>
+                                                {orderStatus == 'delivering' && 'delivering'}
+                                                {orderStatus == 'processing' && 'deliver'}
+                                            </button>
                                         </div>
-                                    </Link>
+                                    }
                                     
+                                   {orderStatus == 'delivering' || orderStatus == 'completed' ?
+                                    <div onClick={() => setOrderStatus('completed', orderId)}>
+                                        <button 
+                                            className={`bg-[#000] text-[#fff] ${orderStatus == 'completed' ? 'bg-[#42ca30]' : 'bg-[#000]'} text-xs px-2 py-1 rounded-sm`}>
+                                            {orderStatus == 'completed' ? 'completed' : 'Done'}
+                                        </button>
+                                    </div> :
+                                    null
+                                   }
                                 </div>
                             </div>
                         </td>
