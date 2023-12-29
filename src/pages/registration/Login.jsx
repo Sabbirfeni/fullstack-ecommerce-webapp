@@ -66,13 +66,13 @@ function Login() {
             <div className="form-container flex flex-col justify-center items-center">
                 <p className="title">Login</p>
                 {/* <p class="sub-title">Let's get statred with your 30 days free trial</p> */}
-                <form className="sign-form">
+                <form className="sign-form my-4">
                     <input 
                         value={email} 
                         onChange={e => setEmail(e.target.value)}
                         name='name'
                         type="email"
-                        className="input"
+                        className='border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none'
                         placeholder="Email"
                     />
                     <input 
@@ -80,12 +80,13 @@ function Login() {
                         onChange={e => setPassword(e.target.value)}
                         name='password'  
                         type="password" 
-                        className="input" 
+                        className='border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none' 
                         placeholder="Password"
                     />
                     <button
                         onClick={login}
-                        className={`${loading && 'bg-gray-500 pointer-events-none'} form-btn`}
+                        className={`${loading && 'bg-gray-500 pointer-events-none'} bg-[#000] text-[#fff] py-3 rounded-md`}
+                        
                         disabled={loading}
                     >
                         {loading ? 'Loading...' : 'Log in'}

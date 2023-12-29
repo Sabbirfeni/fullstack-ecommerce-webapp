@@ -33,7 +33,7 @@ function Filter() {
                             onChange={e => setFilterType(e.target.value)}
                             color='secondary'
                             size='small'
-                            sx={{ padding: { xs: '1px 0px', md: '2px 0px' },}}
+                            sx={{ padding: { xs: '1px 0px', md: '2px 0px' }}}
                             MenuProps={{
                                 disableScrollLock: true,
                               }}

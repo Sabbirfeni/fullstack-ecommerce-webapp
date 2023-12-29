@@ -16,14 +16,14 @@ function UpdateProduct() {
                             value={products.title}
                             onChange={e => setProducts({ ...products, title: e.target.value })}
                             name='title'
-                            className='input'
+                            className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                             placeholder='Product title'
                         />
                         <input type="text"
                                 value={products.price}
                                 onChange={e => setProducts({ ...products, price: e.target.value })}
                                 name='price'
-                                className='input'
+                                className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product price'
                         />
                     </div>
@@ -32,14 +32,14 @@ function UpdateProduct() {
                                 value={products.imageUrl}
                                 onChange={e => setProducts({ ...products, imageUrl: e.target.value })}
                                 name='imageurl'
-                                className='input'
+                                className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product imageUrl'
                             />
                         <input type="text"
                                 value={products.catergory}
                                 onChange={e => setProducts({ ...products, catergory: e.target.value })}
                                 name='category'
-                                className=' input'
+                                className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product category'
                             />
                     </div>
@@ -47,14 +47,14 @@ function UpdateProduct() {
                       <textarea cols="30" rows="5" name='title'
                             value={products.description}
                             onChange={e => setProducts({ ...products, description: e.target.value })}
-                            className='input'
+                            className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                             placeholder='Product description'>
                        </textarea>
 
                     <button
                         onClick={updateProduct}
                         disabled={loading}
-                        className={`${loading && 'bg-gray-500 pointer-events-none'} form-btn`}>
+                        className={`${loading && 'bg-gray-500 pointer-events-none'} bg-[#000] text-[#fff] py-3 rounded-md`}>
                         {loading ? 'Loading...' : 'Update product'}
                     </button>         
                 </form>

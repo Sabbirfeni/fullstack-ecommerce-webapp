@@ -5,6 +5,7 @@ import Track from '../../components/track/Track'
 import Testimonial from '../../components/testimonial/Testimonial'
 import ProductList from '../../components/productCard/ProductList'
 import SpaceWrapper from '../../wrapper/productListWrapper/SpaceWrapper'
+import ProductReviewList from '../../components/product-review/ProductReviewList'
 
 function Home() {
 
@@ -16,6 +17,9 @@ function Home() {
       </SpaceWrapper>
       <SpaceWrapper>
         <ProductList limit={16}/>
+      </SpaceWrapper>
+      <SpaceWrapper>
+        <ProductReviewList/>
       </SpaceWrapper>
 
       {/* <Track/> */}

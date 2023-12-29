@@ -62,10 +62,10 @@ export default function Navbar() {
           </div>
 
 
-          {/* cart */}
+          {/* cart & menu bar */}
           <div className='flex lg:hidden gap-3 md:gap-5'>
             <Link to='/cart' className='relative'>
-              {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#000]'>{cartItems.length}</div>}
+              {cartItems.length > 0 && <div className='absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#3fd1eb]'>{cartItems.length}</div>}
               <img src={cart} className='w-5' alt="cart" />
             </Link>
             {
@@ -76,10 +76,9 @@ export default function Navbar() {
               )
             }
           </div>
-          
         </div>
 
-       
+      
 
         <div className='navbar-right hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
 
@@ -94,7 +93,7 @@ export default function Navbar() {
           {/* cart */}
           <div className='hidden lg:block'>
             <Link to='/cart' className='relative'>
-              {cartItems.length > 0 && <div className='absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#000]'>{cartItems.length}</div>}
+            {cartItems.length > 0 && <div className='absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center text-xs rounded-full text-white p-2 bg-[#3fd1eb]'>{cartItems.length}</div>}
               <img src={cart} className='w-5' alt="cart" />
             </Link>
           </div>
