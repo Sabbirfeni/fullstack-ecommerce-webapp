@@ -13,6 +13,7 @@ import TotalProducts from "../pages/admin/pages/TotalProducts";
 import TotalOrders from "../pages/admin/pages/TotalOrders";
 import TotalUsers from "../pages/admin/pages/TotalUsers";
 import Overview from "../pages/admin/pages/overview/Overview";
+import AllReviews from "../pages/reviews/AllReviews";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/cart',
                 element: <Cart/>
+            },
+            {
+                path: '/reviews',
+                element: <AllReviews/>
             },
             {
                 path: '/order',

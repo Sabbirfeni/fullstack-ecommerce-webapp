@@ -19,7 +19,7 @@ function Filter() {
     }
 
     return (
-        <div className=''>
+        <div className='mb-3 md:mb-5'>
             <div className="flex">
                 <div className='filter-options flex-1 flex items-center gap-2 gap-md-5'>
                     {/* <p className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Filters</p> */}
@@ -68,10 +68,11 @@ function Filter() {
                             
                         </Select>
                     </FormControl>
+                    <button onClick={resetFilters} className='border-none text-[#000] text-xs px-2 md:px-3 rounded-sm'>Reset</button>
                 </div>
-                <div className='reset-filter flex-1 flex items-center justify-end'>
-                    <button onClick={resetFilters} className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Reset filters</button>
-                </div>
+                {/* <div className='reset-filter flex-1 flex items-center justify-end'>
+                   
+                </div> */}
             </div>
         </div>
     )

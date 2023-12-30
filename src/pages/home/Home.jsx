@@ -6,21 +6,19 @@ import Testimonial from '../../components/testimonial/Testimonial'
 import ProductList from '../../components/productCard/ProductList'
 import SpaceWrapper from '../../wrapper/productListWrapper/SpaceWrapper'
 import ProductReviewList from '../../components/product-review/ProductReviewList'
+import SectionWrapper from '../../wrapper/sectionWrapper/SectionWrapper'
 
 function Home() {
 
   return (
-    <div>
+    <div className='flex flex-col gap-5 md:gap-8'>
       <HeroSection/>
-      <SpaceWrapper>
-        <Filter/>
-      </SpaceWrapper>
-      <SpaceWrapper>
+      <SectionWrapper sectionTitle='All product' allProductUrl='/allproducts'>
         <ProductList limit={16}/>
-      </SpaceWrapper>
-      <SpaceWrapper>
+      </SectionWrapper>
+      <SectionWrapper sectionTitle='Cutomer reviews' allProductUrl='/reviews'>
         <ProductReviewList/>
-      </SpaceWrapper>
+      </SectionWrapper>
 
       {/* <Track/> */}
       {/* <Testimonial/> */}

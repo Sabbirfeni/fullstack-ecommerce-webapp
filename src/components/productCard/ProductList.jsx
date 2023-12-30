@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { product1, product2, product3 } from '../../assets/images'
 import './productList.css'
 import { toast } from 'react-toastify'
+import Filter from '../filter/Filter'
 
 function ProductList({ limit }) {
     const context = useContext(myContext)
@@ -23,7 +24,8 @@ function ProductList({ limit }) {
         localStorage.setItem('cart', JSON.stringify(cartItem))
     }, [cartItem])
     return (
-        <div className='mb-8'>
+        <div>
+            <Filter/>
             <div className='product-list grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-cols-2 gap-2 md:gap-3'>
             
             {product.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))

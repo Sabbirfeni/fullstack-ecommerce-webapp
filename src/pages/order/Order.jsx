@@ -28,19 +28,22 @@ function Order() {
                      
               return ( 
                 <div key={index}>
-                  <Link to={`/productinfo/${orderId}`} key={`${index}`} className='cart-item h-24 md:h-32 bg-[#fff] flex rounded-md overflow-hidden'>
+                  <div 
+                  // to={`/productinfo/${orderId}`} 
+                  key={`${index}`} className='cart-item h-24 md:h-32 bg-[#fff] flex rounded-md overflow-hidden'>
                       <img src={imageUrl} alt="product-image" className="w-24 md:w-32 h-full object-cover" />
                       <div className="flex flex-1 w-full h-full px-3 py-3 md:py-4">
                         <div className="relative w-full">
                           <h2 className="text-md font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>{title}</h2>
                           <h2 className="text-xs md:text-sm" style={{ color: mode === 'dark' ? 'white' : '' }}>{description.length > 50 ? description.slice(0, 50) : description}</h2>
-                          <div className='flex items-center justify-between absolute bottom-0 w-full mt-3'>
-                            <h2 className="text-xs md:text-md font-bold">$ {price}</h2>
+                          <div className='flex items-center absolute bottom-0 w-full mt-3'>
+                            <h2 className="text-xs md:text-md flex-1 font-bold">$ {price}</h2>
                             <h2 className={`text-xs  ${orderStatus == 'delivering' ? 'text-[#42ca30]' : orderStatus == 'completed' ? 'text-[#fff] bg-[#42ca30] py-0.5 px-2 rounded-sm' : 'text-orange-500'}`}>{orderStatus}</h2>
+                            {orderStatus === 'completed' && <button className='text-xs bg-[#000] text-[#fff] py-0.5 px-2 rounded-xs ml-3'>submit review</button>}
                           </div>
                         </div>
                       </div>
-                  </Link>
+                  </div>
                 </div>
               )
             })} 
