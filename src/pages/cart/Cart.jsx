@@ -9,6 +9,7 @@ import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { fireDB } from '../../firebase/FirebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import './cart.css'
+import OrderForm from '../../components/Form/OrderForm';
 
 
 function Cart() {
@@ -20,9 +21,10 @@ function Cart() {
   const user = JSON.parse(localStorage.getItem('user')) 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  let [isModelOpen, setIsModelOpen] = useState(false)
+  const [isModelOpen, setIsModelOpen] = useState(false)
+  
   // All the values of fakepay form (order form)
-  const [ addressInfo, setAddressInfo ] = useState({
+  const [ orderInfo, setOrderInfo ] = useState({
     fullName: '',
     address: '',
     phone: '',
@@ -30,17 +32,12 @@ function Cart() {
     cardExpDate: '',
     code: ''
   })
-
-
-  const fakePayOnChange = e => {
-    setAddressInfo(state => ({ ...state, [e.target.name]: e.target.value }))
+  const { fullName, address, phone, cardNo, cardExpDate, code } = orderInfo
+  const handleOnChange = e => {
+    setOrderInfo(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  
-
-  const handleBuy = async e => {
-
-    const { fullName, address, phone, cardNo, cardExpDate, code } = addressInfo
+  const handleOrderSubmit = async e => {
     e.preventDefault()
 
     if(fullName == '' || address == '' || phone == '' || cardNo == '' || cardExpDate == '' || code == '') {
@@ -57,7 +54,7 @@ function Cart() {
     const orderItems = []
     cartItem.forEach(item => {
       const { catergory, description, imageUrl, price, productId } = item
-      const orderInfo = {
+      const orderDetails = {
         catergory,
         description,
         imageUrl,
@@ -70,6 +67,7 @@ function Cart() {
         cardExpDate,
         code,
         orderStatus: 'processing',
+        isReviewSumbitted: false,
         date: new Date().toLocaleString("en-US", {
           month: 'short',
           day: '2-digit',
@@ -79,7 +77,7 @@ function Cart() {
         userid,
         paymentId: userid.slice(0, 8)
       }
-      orderItems.push(orderInfo)
+      orderItems.push(orderDetails)
     })
     
     try {
@@ -118,6 +116,7 @@ function Cart() {
   const [ totalAmount, setTotalAmount ] = useState(0)
   let shipping = totalAmount == 0 ? 0 : 100;
   let groundTotal = shipping + totalAmount
+
   useEffect(() => {
     let temp = 0
     cartItem.forEach(item => {
@@ -176,8 +175,15 @@ function Cart() {
             <p className='font-bold'>Total</p>
             <p className='font-bold'>$ {groundTotal}</p>
           </div>
-          
-          <Modal orderInfo={addressInfo} handleOnChange={fakePayOnChange} handleBuy={handleBuy} isOpen={isModelOpen} setIsOpen={setIsModelOpen}/>
+          <div className=" text-center rounded-lg text-white font-bold">
+              <button className='w-full bg-[#000] text-[#fff] py-2 rounded-md mt-5' onClick={() => user ? setIsModelOpen(true) : navigate('/login')}>Order now</button>
+          </div>
+          <Modal 
+          isOpen={isModelOpen} 
+          setIsOpen={setIsModelOpen}
+          >
+            <OrderForm handleOnChange={handleOnChange} handleSubmit={handleOrderSubmit} formData={orderInfo}/>
+          </Modal>
         </div>
         
       </div>

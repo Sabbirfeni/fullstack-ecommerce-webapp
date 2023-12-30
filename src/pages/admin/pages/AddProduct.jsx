@@ -25,7 +25,7 @@ function AddProduct() {
 
     return (
 
-        <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center'>
         <div className="form-container flex flex-col">
             <p className="title mb-5">Add new product</p>
             <form className="sign-form">
