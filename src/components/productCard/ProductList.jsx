@@ -7,6 +7,7 @@ import { product1, product2, product3 } from '../../assets/images'
 import './productList.css'
 import { toast } from 'react-toastify'
 import Filter from '../filter/Filter'
+import { animate, motion } from "framer-motion"
 
 function ProductList({ limit }) {
     const context = useContext(myContext)
@@ -37,7 +38,11 @@ function ProductList({ limit }) {
                         
                         return (
 
-                            <div key={productId} className='bg-[#fff] rounded-md product-card-container'>
+                            <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.7 }}
+                            key={productId} className='bg-[#fff] rounded-md product-card-container'>
                                 <Link to={`/productinfo/${productId}`}>
                                     <div className='h-44 lg:h-52 2xl:h-52 overflow-hidden'>
                                         <img src={`${imageUrl}`} alt="product-image" className='product-img w-full h-full object-cover rounded-t-md' />
@@ -53,7 +58,7 @@ function ProductList({ limit }) {
                                     <h4 className='text-sm sm:text-md lg:text-lg font-bold'>$ {price}</h4>
                                     <button onClick={() => addCart(item)} className='addto-card-btn bg-[#e2e8f0] hover:bg-[#000] transition hover:text-[#fff] px-3 py-2 text-xs rounded-sm z-40'>Add to cart</button>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     })}
                 
