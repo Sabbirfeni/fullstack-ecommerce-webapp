@@ -12,13 +12,13 @@ import { getAuth } from 'firebase/auth';
 
 // FIREBASE CONFIG OBJECT WILL BE HERE. IT HAS BEEN REMOVED FOR SECURITY PURPOSE
 const firebaseConfig = {
-    apiKey: "AIzaSyBnztWOaySd-GPDrnpjKHKNGyjMw31g6F0",
-    authDomain: "full-stack-ecommerce-app-cc57d.firebaseapp.com",
-    projectId: "full-stack-ecommerce-app-cc57d",
-    storageBucket: "full-stack-ecommerce-app-cc57d.appspot.com",
-    messagingSenderId: "785258486816",
-    appId: "1:785258486816:web:0d120837c5e9ee0c6bb045",
-    measurementId: "G-SV00JHSYTP"
+  apiKey: "AIzaSyDf2MGHisKSy3Enjh-G0AjbSXkhYEbtg4k",
+  authDomain: "filicx-63414.firebaseapp.com",
+  projectId: "filicx-63414",
+  storageBucket: "filicx-63414.appspot.com",
+  messagingSenderId: "851651296635",
+  appId: "1:851651296635:web:3209478b9172dcbfc4d1de",
+  measurementId: "G-9HT3GNSHSC"
   };
 
 // Initialize Firebase

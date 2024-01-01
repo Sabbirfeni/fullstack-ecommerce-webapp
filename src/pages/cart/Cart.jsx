@@ -15,7 +15,7 @@ import OrderForm from '../../components/Form/OrderForm';
 function Cart() {
   // cart
   const context = useContext(myContext)
-  const { mode, setOrders, setLoading } = context;
+  const { mode, setOrders, getOrderData, setLoading } = context;
 
   const cartItem = useSelector(state => state.cart)
   const user = JSON.parse(localStorage.getItem('user')) 
@@ -85,13 +85,7 @@ function Cart() {
         const docRef = collection(fireDB, 'orders')
         await addDoc(docRef, orderData)
       })
-
-      const orderArray = [];
-      const orders = await getDocs(collection(fireDB, 'orders'))
-      orders.forEach(doc => {
-        orderArray.push(doc.data())
-      })
-      setOrders(orderArray)
+      getOrderData()
       
       toast.success('order completed!')
       localStorage.removeItem('cart')

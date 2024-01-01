@@ -1,11 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MyContext from '../../../context/data/myContext';
 import DataTable from '../../../components/table/DataTable';
 import { Link } from 'react-router-dom';
 
 function TotalUsers() {
   const context = useContext(MyContext)
-  const { mode, product, deleteProduct, editHandle, orders, users } = context
+  const { mode, product, deleteProduct, editHandle, orders, users, getUserData } = context
+    useEffect(() => {
+        getUserData()
+    }, [users])
   return (
     
     <DataTable title='All user'>

@@ -6,34 +6,56 @@ import { Link } from 'react-router-dom';
 import Modal from '../../components/modal/Modal';
 import ReviewForm from '../../components/Form/ReviewForm';
 import { toast } from 'react-toastify';
+import { fireDB } from '../../firebase/FirebaseConfig';
+import { doc, setDoc } from 'firebase/firestore';
 function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid;
   const context = useContext(MyContext);
-  const { mode, loading, orders } = context;
+  const { mode, loading, orders, getOrderData } = context;
+  const [ reviewLoading, setReviewLoading ] = useState(false)
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [ orderId, setOrderId ] = useState(null);
   const [ reviewText, setReviewText ] = useState('');
-
   const handleModal = orderId => {
     setIsModelOpen(true)
     setOrderId(orderId)
   }
-  const handleReviewSubmit = e => {
+  const handleReviewSubmit = async e => {
     e.preventDefault()
+    
     if(!reviewText) {
       toast.info('Please write a comment.')
       return
     }
-    const productInfo = orders.find(item => item.orderId === orderId);
-    toast.success('Thanks for your feedback')
-    setIsModelOpen(false)
-    console.log(reviewText)
+    const orderInfo = orders.find(item => item.orderId === orderId);
+    
+    setReviewLoading(true)
+    try {
+      const docRef = doc(fireDB, 'orders', orderInfo.orderId)
+      await setDoc(docRef, { ...orderInfo, isReviewSumbitted: true })
+      getOrderData()
+
+      toast.success('Thanks for your feedback.')
+      setReviewLoading(false)
+      setIsModelOpen(false)
+    } catch(err) {
+      setReviewLoading(false)
+      toast.info('Failed to submit.')
+      console.log(err)
+    }
+    setReviewText('')
+
   }
 
   useEffect(() => {
     // scroll to top on page load
     window.scrollTo({top: 0, left: 0});
+    getOrderData()
   }, []);
+
+  useEffect(() => {
+    getOrderData()
+  }, [orders]);
   
   if(loading) {
     return <Loader/>
@@ -45,7 +67,7 @@ function Order() {
           <div className='cart-item-container w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2 md:gap-3'>
             {orders.filter(obj => obj.userid == userid).map((order, index) => {
 
-              const { orderId, title, description, price, imageUrl, orderStatus } = order
+              const { orderId, title, description, price, imageUrl, orderStatus, isReviewSumbitted } = order
                      
               return ( 
                 <div key={index}>
@@ -60,7 +82,7 @@ function Order() {
                           <div className='flex items-center absolute bottom-0 w-full mt-3'>
                             <h2 className="text-xs md:text-md flex-1 font-bold">$ {price}</h2>
                             <h2 className={`text-xs  ${orderStatus == 'delivering' ? 'text-[#42ca30]' : orderStatus == 'completed' ? 'text-[#42ca30] rounded-sm' : 'text-orange-500'}`}>{orderStatus}</h2>
-                            {orderStatus === 'completed' && <button onClick={() => handleModal(orderId)} className='text-xs bg-[#42ca30] text-[#fff] py-0.5 px-2 rounded-xs ml-3'>submit review</button>}
+                            {(orderStatus === 'completed' && !isReviewSumbitted)  && <button onClick={() => handleModal(orderId)} className='text-xs bg-[#42ca30] text-[#fff] py-0.5 px-2 rounded-xs ml-3'>submit review</button>}
                           </div>
                         </div>
                       </div>
@@ -70,7 +92,7 @@ function Order() {
               )
             })} 
             <Modal isOpen={isModelOpen} setIsOpen={setIsModelOpen}>
-                <ReviewForm handleOnChange={setReviewText} handleSubmit={handleReviewSubmit} value={reviewText}/>
+                <ReviewForm handleOnChange={setReviewText} loading={reviewLoading} handleSubmit={handleReviewSubmit} value={reviewText}/>
             </Modal>
           </div>
     )

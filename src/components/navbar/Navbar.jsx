@@ -7,10 +7,14 @@ import './navbar.css'
 import { Avatar } from '@mui/material'
 import { HiBars3 } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
+import { animate, motion } from "framer-motion"
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
   const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
+  const profileMenuVariant = {
+    open: { opacity: 1 },
+    close: { opacity: 0 }
+  }
   const navigate = useNavigate()
 
   const context = useContext(myContext)
@@ -123,7 +127,10 @@ export default function Navbar() {
           <div className='cursor-pointer relative'>
             <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
               
-              <div className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+              <motion.div
+              animate={profileMenuOpen ? 'open' : 'close' }
+              variants={profileMenuVariant}
+              className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
 
                 {/* dashboard item will show if user is admin */}
                 {isAdmin && (
@@ -145,7 +152,7 @@ export default function Navbar() {
                       Logout
                   </Link>
               
-              </div>
+              </motion.div>
             
           </div>
           )}

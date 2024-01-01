@@ -139,7 +139,6 @@ function MyState(props) {
         orderArray.push({...doc.data(), orderId: doc.id})
         setLoading(false)
       })
-      console.log(orderArray)
       setOrders(orderArray)
       setLoading(false)
     } catch(err) {
@@ -196,9 +195,11 @@ function MyState(props) {
     editHandle, 
     updateProduct, 
     deleteProduct, 
-    orders, 
+    orders,
+    getOrderData,
     setOrders,
     users,
+    getUserData,
     searchKey,
     filterType,
     filterPrice,

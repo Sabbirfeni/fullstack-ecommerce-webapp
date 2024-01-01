@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import MyContext from '../../context/data/myContext';
 
-function ReviewForm({ handleOnChange, handleSubmit, value }) {
-    const context = useContext(MyContext);
-    const { loading } = context;
+function ReviewForm({ handleOnChange, handleSubmit, value, loading }) {
   return (
 
     <div className='flex justify-center items-center'>

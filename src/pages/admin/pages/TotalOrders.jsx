@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MyContext from '../../../context/data/myContext';
 import DataTable from '../../../components/table/DataTable';
 import { Link } from 'react-router-dom';
@@ -8,29 +8,28 @@ import { fireDB } from '../../../firebase/FirebaseConfig';
 
 function TotalOrders() {
   const context = useContext(MyContext)
-  const { mode, product, deleteProduct, editHandle, orders, setOrders, users } = context
+  const { mode, product, deleteProduct, editHandle, orders, setOrders, getOrderData, users } = context
   const [ loading, setLoading ] = useState(false)
-  const setOrderStatus = async (status, orderId) => {
 
+  const setOrderStatus = async (status, orderId) => {
     setLoading(true)
     try {
         const docRef = doc(fireDB, 'orders', orderId)
-        const docSnap = await getDoc(docRef)
-        const orderData = docSnap.data()
+        const orderData = orders.find(item => item.orderId === orderId);
         await setDoc(docRef, {...orderData, orderStatus: status})
         const result = await getDocs(collection(fireDB, 'orders'))
-        const orderArray = [];
-        result.forEach(doc => {
-            orderArray.push({...doc.data(), orderId: doc.id})
-            setLoading(false)
-        })
-        setOrders(orderArray)
+        getOrderData()
         setLoading(false)
     } catch(err) {
-        console.log(err.message)
+        console.log(err)
         setLoading(false)
     }
   }
+
+//   useEffect(() => {
+//     getOrderData()
+//   }, [orders])
+
   let orderSerial = 0;
 
   return (

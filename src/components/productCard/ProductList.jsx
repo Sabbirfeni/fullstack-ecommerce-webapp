@@ -12,7 +12,7 @@ import { animate, motion } from "framer-motion"
 function ProductList({ limit }) {
     const context = useContext(myContext)
     const { mode, product, searchKey, filterType, filterPrice, } = context
- 
+
     const cartItem = useSelector(state => state.cart)
     const dispatch = useDispatch();
 
@@ -37,17 +37,17 @@ function ProductList({ limit }) {
                         const { productId, title, price, description, imageUrl } = item;
                         
                         return (
-
                             <motion.div
-                            initial={{ opacity: 0 }}
+                            initial={{ opacity: 0, }}
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 0.7 }}
+                            
                             key={productId} className='bg-[#fff] rounded-md product-card-container'>
                                 <Link to={`/productinfo/${productId}`}>
                                     <div className='h-44 lg:h-52 2xl:h-52 overflow-hidden'>
                                         <img src={`${imageUrl}`} alt="product-image" className='product-img w-full h-full object-cover rounded-t-md' />
                                     </div>
-                                    
+                                
                                     <div className='p-2 md:p-3 lg:p-3 xl:p-4'>
                                         <h3 className='text-xs sm:text-sm md:text-md font-bold md:mb-2'>{title}</h3>
                                         <p className='product-description hidden md:block text-xs'>{description.length > 40 ? description.slice(0, 40) + '...' : description}</p>
