@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 function TotalProducts() {
   const context = useContext(MyContext)
   const { mode, allProducts, deleteProduct, editHandle, orders, users } = context
+  
   return (
-    
     <DataTable title='Total products'>
       <div className="data-table relative overflow-x-auto rounded-md">
           <table className="w-full text-sm text-left rtl:text-right">
@@ -37,7 +37,7 @@ function TotalProducts() {
                   </tr>
               </thead>
               <tbody>
-              {singleProduct.map((item, index) => {
+              {allProducts.map((item, index) => {
 
                   const { title, price, imageUrl, catergory, description, time, date } = item;
           

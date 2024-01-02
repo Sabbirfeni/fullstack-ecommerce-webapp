@@ -47,11 +47,11 @@ function MyState(props) {
 
     try {
       // setLoading(true)
-      const allProductsRef = collection(fireDB, 'singleProduct');
+      const allProductsRef = collection(fireDB, 'products');
       await addDoc(allProductsRef, singleProduct)
       toast.success('new allProducts added.')
       setTimeout(() => {
-        navigate('/dashboard/all-singleProduct');
+        navigate('/dashboard/all-products');
       }, 800)
       setLoading(false)
     } catch(err) {

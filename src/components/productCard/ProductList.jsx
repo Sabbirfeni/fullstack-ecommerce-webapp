@@ -32,6 +32,8 @@ function ProductList({ limit }) {
         return <Loader/>
     }
 
+
+
     return (
         <div>
             <Filter/>
@@ -46,9 +48,9 @@ function ProductList({ limit }) {
                         
                         return (
                             <motion.div
-                            initial={{ opacity: 0, }}
+                            initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ duration: 0.7 }}
+                            transition={{ duration: 0.6 }}
                             
                             key={productId} className='bg-[#fff] rounded-md product-card-container'>
                                 <Link to={`/productinfo/${productId}`}>

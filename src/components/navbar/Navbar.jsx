@@ -7,7 +7,7 @@ import './navbar.css'
 import { Avatar } from '@mui/material'
 import { HiBars3 } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
-import { animate, motion } from "framer-motion"
+import { AnimatePresence, animate, motion } from "framer-motion"
 
 export default function Navbar() {
   const [ profileMenuOpen, setProfileMenuOpen ] = useState(false)
@@ -126,34 +126,39 @@ export default function Navbar() {
           { user && (
           <div className='cursor-pointer relative'>
             <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
-              
-              <motion.div
-              animate={profileMenuOpen ? 'open' : 'close' }
-              variants={profileMenuVariant}
-              className={`menu-container absolute -left-20 z-50 ${profileMenuOpen ? 'flex' : 'hidden'} py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+              <AnimatePresence>
+               {profileMenuOpen && 
+               (<motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ x: [null, -100, 0], opacity: 1}  }
+                  transition={{ duration: 0.2 }}
+                  exit={{ x: 100, opacity: 0 }}
+                  variants={profileMenuVariant}
+                  className={`menu-container absolute -left-20 z-50 flex py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
 
-                {/* dashboard item will show if user is admin */}
-                {isAdmin && (
-                  <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
-                )}
-                
-                
-                <Link to='/order' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>My orders</Link>
+                  {/* dashboard item will show if user is admin */}
+                  {isAdmin && (
+                    <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+                  )}
+                  
+                  
+                  <Link to='/order' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>My orders</Link>
 
-                {/* Logout item */}
+                  {/* Logout item */}
+                  
+                    <Link 
+                      onClick={() => {
+                        handleProfileMenu();
+                        logout()
+                      }} 
+                      className='hover:bg-gray-200 py-1.5 px-3'
+                    >
+                        Logout
+                    </Link>
                 
-                  <Link 
-                    onClick={() => {
-                      handleProfileMenu();
-                      logout()
-                    }} 
-                    className='hover:bg-gray-200 py-1.5 px-3'
-                  >
-                      Logout
-                  </Link>
-              
-              </motion.div>
-            
+                </motion.div>)}
+              </AnimatePresence>
+
           </div>
           )}
 
