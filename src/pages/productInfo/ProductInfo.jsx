@@ -6,11 +6,13 @@ import Loader from '../../components/loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/cartSlice'
 import { toast } from 'react-toastify'
+import ProductReviewList from '../../components/product-review/ProductReviewList'
 
 function ProductInfo() {
     const { id } = useParams()
-    const { product, loading } = useContext(MyContext)
-    const productDetails = product.filter(item => item.id == id)
+    const { allProducts, loading } = useContext(MyContext)
+    const productDetails = allProducts.filter(item => item.productId == id)
+
     const cartItem = useSelector(state => state.cart)
     const dispatch = useDispatch()
     const addCart = item => {
@@ -30,8 +32,7 @@ function ProductInfo() {
     if(loading) {
         return <Loader/>
     }
-    if(product.length > 0) {
-
+    if(allProducts.length > 0) {
         return (
             <div className='min-h-[70vh]'>
                 <div className='product-details-container lg:w-4/5 flex items-start justify-center flex-wrap'>
@@ -121,6 +122,7 @@ function ProductInfo() {
                     
                     </div>
                 </div>
+                <ProductReviewList productId={id}/>
             </div>
 
             // <section className="text-[#000] body-font overflow-hidden">

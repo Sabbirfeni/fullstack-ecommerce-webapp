@@ -11,7 +11,7 @@ import { purple } from '@mui/material/colors';
 function Filter() {
 
     const context = useContext(MyContext)
-    const { mode, product, searchKey, filterType, filterPrice, setSearchKey, setFilterType, setFilterPrice } = context
+    const { mode, allProducts, searchKey, filterType, filterPrice, setSearchKey, setFilterType, setFilterPrice } = context
 
     const resetFilters = () => {
         setFilterType('')
@@ -38,7 +38,7 @@ function Filter() {
                                 disableScrollLock: true,
                               }}
                         >
-                            {product.map((item, index) => {
+                            {allProducts.map((item, index) => {
                                 return <MenuItem key={index} value={item.catergory} sx={{ fontSize: '14px' }}>{item.catergory}</MenuItem>
                             })}
                             

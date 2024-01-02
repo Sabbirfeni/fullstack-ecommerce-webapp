@@ -7,11 +7,12 @@ import Modal from '../../components/modal/Modal';
 import ReviewForm from '../../components/Form/ReviewForm';
 import { toast } from 'react-toastify';
 import { fireDB } from '../../firebase/FirebaseConfig';
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+
 function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid;
   const context = useContext(MyContext);
-  const { mode, loading, orders, getOrderData } = context;
+  const { mode, loading, orders, getOrderData, getReviews } = context;
   const [ reviewLoading, setReviewLoading ] = useState(false)
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [ orderId, setOrderId ] = useState(null);
@@ -28,13 +29,21 @@ function Order() {
       return
     }
     const orderInfo = orders.find(item => item.orderId === orderId);
-    
+    const reviewData = {
+      fullName: orderInfo.fullName,
+      reviewText,
+      productId: orderInfo.productId,
+      productImg: orderInfo.imageUrl
+    }
     setReviewLoading(true)
     try {
       const docRef = doc(fireDB, 'orders', orderInfo.orderId)
       await setDoc(docRef, { ...orderInfo, isReviewSumbitted: true })
-      getOrderData()
 
+      const reviewRef = collection(fireDB, 'product-reviews');
+      await addDoc(reviewRef, reviewData)
+      getOrderData()
+      getReviews()
       toast.success('Thanks for your feedback.')
       setReviewLoading(false)
       setIsModelOpen(false)
@@ -53,9 +62,6 @@ function Order() {
     getOrderData()
   }, []);
 
-  useEffect(() => {
-    getOrderData()
-  }, [orders]);
   
   if(loading) {
     return <Loader/>

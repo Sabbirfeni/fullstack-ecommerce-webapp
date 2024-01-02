@@ -3,7 +3,7 @@ import MyContext from './myContext'
 import { toast } from 'react-toastify';
 import { fireDB } from '../../firebase/FirebaseConfig';
 import { AuthErrorCodes } from 'firebase/auth';
-import { QuerySnapshot, Timestamp, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
+import { QuerySnapshot, Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 function MyState(props) {
@@ -24,7 +24,7 @@ function MyState(props) {
   const [ loading, setLoading ] = useState(false);
   const [ mobileMenuOpen, setMobileMenuOpen ] = useState(false)
 
-  const [ products, setProducts ] = useState({
+  const [ singleProduct, setSingleProduct ] = useState({
     title: '',
     price: '',
     imageUrl: '',
@@ -40,33 +40,29 @@ function MyState(props) {
 
   const addProduct = async (e) => {
     e.preventDefault()
-    if(products.title == '' || products.price == '' || products.imageUrl == '' || products.catergory == '' || products.description == '') {
+    if(singleProduct.title == '' || singleProduct.price == '' || singleProduct.imageUrl == '' || singleProduct.catergory == '' || singleProduct.description == '') {
       toast.error('All fields required!');
       return 
     }
 
     try {
-      setLoading(true)
-      const productRef = collection(fireDB, 'products');
-      await addDoc(productRef, products)
-      toast.success('new product added.')
+      // setLoading(true)
+      const allProductsRef = collection(fireDB, 'singleProduct');
+      await addDoc(allProductsRef, singleProduct)
+      toast.success('new allProducts added.')
       setTimeout(() => {
-        navigate('/dashboard/all-products');
+        navigate('/dashboard/all-singleProduct');
       }, 800)
-      getProductData()
       setLoading(false)
     } catch(err) {
       console.log(AuthErrorCodes)
       setLoading(false)
     }
-
   }
 
-  const [ product, setProduct ] = useState([])
-
+  const [ allProducts, setAllProducts ] = useState([])
   const getProductData = async () => {
     setLoading(true);
-
     try {
       const q = query(
         collection(fireDB, 'products'),
@@ -74,11 +70,12 @@ function MyState(props) {
       );
 
       const data = onSnapshot(q, (QuerySnapshot) => {
-        let productArray = []
+        let allProductsArray = []
         QuerySnapshot.forEach(doc => {
-          productArray.push({ ...doc.data(), productId: doc.id })
+          
+          allProductsArray.push({ ...doc.data(), productId: doc.id })
         })
-        setProduct(productArray)
+        setAllProducts(allProductsArray)
         setLoading(false)
       });
 
@@ -91,19 +88,18 @@ function MyState(props) {
   }
 
   const editHandle = item => {
-    setProducts(item)
+    setSingleProduct(item)
   }
 
   const updateProduct = async (e) => {
     e.preventDefault()
-
     try {
       setLoading(true)
-      const docRef = doc(fireDB, 'products', products.id)
-      await setDoc(docRef, products)
-      toast.success('product updated.')
+      const docRef = doc(fireDB, 'singleProduct', singleProduct.allProductsId)
+      await setDoc(docRef, singleProduct)
+      toast.success('allProducts updated.')
       setTimeout(() => {
-        navigate('/dashboard/all-products');
+        navigate('/dashboard/all-singleProduct');
       }, 800)
       getProductData()
       setLoading(false)
@@ -115,27 +111,25 @@ function MyState(props) {
 
   const deleteProduct = async item => {
     setLoading(true)
-
     try {
-      const docRef = doc(fireDB, 'products', item.id)
+      const docRef = doc(fireDB, 'singleProduct', item.allProductsId)
       await deleteDoc(docRef)
-      toast.info('product deleted.')
+      toast.info('allProducts deleted.')
       getProductData()
       setLoading(false)
     } catch(err) {
-      console.log(err)
+      console.log(err.message)
       setLoading(false)
     }
   }
 
   const [ orders, setOrders ] = useState([]);
-
   const getOrderData = async () => {
     setLoading(true)
     try {
-      const result = await getDocs(collection(fireDB, 'orders'))
+      const orderRef = await getDocs(collection(fireDB, 'orders'))
       const orderArray = [];
-      result.forEach(doc => {
+      orderRef.forEach(doc => {
         orderArray.push({...doc.data(), orderId: doc.id})
         setLoading(false)
       })
@@ -146,6 +140,21 @@ function MyState(props) {
       setLoading(false)
     }
   }
+
+  const [ reviews, setReviews ] = useState([])
+  const getReviews = async () => {
+    try {
+      const reviewRef = await getDocs(collection(fireDB, 'product-reviews'))
+      const reviewArray = []
+      reviewRef.forEach(doc => {
+        reviewArray.push({ ...doc.data(), reviewId: doc.id })
+      })
+      setReviews(reviewArray)
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
 
   const [ users, setUsers ] = useState([])
   const getUserData = async () => {
@@ -167,7 +176,6 @@ function MyState(props) {
     }
   }
 
-
   const [ searchKey, setSearchKey ] = useState('')
   const [ filterType, setFilterType ] = useState('')
   const [ filterPrice, setFilterPrice ] = useState('')
@@ -181,6 +189,10 @@ function MyState(props) {
     getOrderData()
   }, [])
 
+  useEffect(() => {
+    getReviews()
+  }, [])
+
   const values = { 
     mode, 
     toggleMode,
@@ -188,10 +200,10 @@ function MyState(props) {
     setMobileMenuOpen,
     loading, 
     setLoading, 
-    products, 
-    setProducts, 
+    singleProduct, 
+    setSingleProduct, 
     addProduct, 
-    product, 
+    allProducts, 
     editHandle, 
     updateProduct, 
     deleteProduct, 
@@ -200,6 +212,9 @@ function MyState(props) {
     setOrders,
     users,
     getUserData,
+    reviews,
+    setReviews,
+    getReviews,
     searchKey,
     filterType,
     filterPrice,

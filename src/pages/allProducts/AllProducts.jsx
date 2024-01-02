@@ -9,15 +9,10 @@ import ProductList from '../../components/productCard/ProductList'
 import SpaceWrapper from '../../wrapper/productListWrapper/SpaceWrapper'
 
 function AllProducts() {
-  const context = useContext(myContext)
-  const { mode, product, searchKey, filterType, filterPrice, } = context
+
 
   const cartItem = useSelector(state => state.cart)
   const dispatch = useDispatch();
-
-  const addCart = item => {
-      dispatch(addToCart(item))
-  }
 
   useEffect(() => {
       localStorage.setItem('cart', JSON.stringify(cartItem))
@@ -29,7 +24,7 @@ function AllProducts() {
   }, []);
   return (
     <div>
-        <ProductList limit={product.length}/>
+        <ProductList />
     </div>
   )
 }

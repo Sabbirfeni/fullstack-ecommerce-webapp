@@ -7,6 +7,7 @@ import { fireDB } from '../../../firebase/FirebaseConfig';
 
 
 function TotalOrders() {
+  let orderSerial = 0;
   const context = useContext(MyContext)
   const { mode, product, deleteProduct, editHandle, orders, setOrders, getOrderData, users } = context
   const [ loading, setLoading ] = useState(false)
@@ -26,11 +27,10 @@ function TotalOrders() {
     }
   }
 
-//   useEffect(() => {
-//     getOrderData()
-//   }, [orders])
+  useEffect(() => {
+    getOrderData()
+  }, [])
 
-  let orderSerial = 0;
 
   return (
     <DataTable title='All user'>

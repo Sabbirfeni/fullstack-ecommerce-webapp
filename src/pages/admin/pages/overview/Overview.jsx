@@ -10,7 +10,7 @@ import DataTable from '../../../../components/table/DataTable';
 
 function Overview() {
     const context = useContext(MyContext)
-    const { mode, product, deleteProduct, editHandle, orders, users } = context
+    const { mode, allProducts, deleteProduct, editHandle, orders, users } = context
     const totalOrders = []
     orders.map(order => {
         totalOrders.push(order)
@@ -27,7 +27,7 @@ function Overview() {
             </div>
             <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
                 <div className='flex items-center justify-between lg:text-3xl text-2xl'>
-                    <h3>{product.length}</h3>
+                    <h3>{allProducts.length}</h3>
                     <div><BsCartCheck/></div>
                 </div>
                 <h3 className='text-xl'>Total products</h3>
@@ -70,7 +70,7 @@ function Overview() {
                         </tr>
                     </thead>
                     <tbody>
-                    {product.slice(0, 5).map((item, index) => {
+                    {allProducts.slice(0, 5).map((item, index) => {
 
                         const { title, price, imageUrl, catergory, description, time, date } = item;
                 

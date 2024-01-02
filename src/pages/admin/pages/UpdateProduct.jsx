@@ -3,7 +3,7 @@ import MyContext from '../../../context/data/myContext'
 
 function UpdateProduct() {
     const context = useContext(MyContext)
-    const { products, setProducts, updateProduct, loading } = context
+    const { singleProduct, setSingleProduct, updateProduct, loading } = context
 
     return (
 
@@ -13,15 +13,15 @@ function UpdateProduct() {
                 <form className="sign-form">
                     <div className="flex flex-col md:flex-row gap-2">
                         <input type="text"
-                            value={products.title}
-                            onChange={e => setProducts({ ...products, title: e.target.value })}
+                            value={singleProduct.title}
+                            onChange={e => setSingleProduct({ ...singleProduct, title: e.target.value })}
                             name='title'
                             className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                             placeholder='Product title'
                         />
                         <input type="text"
-                                value={products.price}
-                                onChange={e => setProducts({ ...products, price: e.target.value })}
+                                value={singleProduct.price}
+                                onChange={e => setSingleProduct({ ...singleProduct, price: e.target.value })}
                                 name='price'
                                 className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product price'
@@ -29,15 +29,15 @@ function UpdateProduct() {
                     </div>
                     <div className="flex flex-col md:flex-row gap-2">
                         <input type="text"
-                                value={products.imageUrl}
-                                onChange={e => setProducts({ ...products, imageUrl: e.target.value })}
+                                value={singleProduct.imageUrl}
+                                onChange={e => setSingleProduct({ ...singleProduct, imageUrl: e.target.value })}
                                 name='imageurl'
                                 className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product imageUrl'
                             />
                         <input type="text"
-                                value={products.catergory}
-                                onChange={e => setProducts({ ...products, catergory: e.target.value })}
+                                value={singleProduct.catergory}
+                                onChange={e => setSingleProduct({ ...singleProduct, catergory: e.target.value })}
                                 name='category'
                                 className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                                 placeholder='Product category'
@@ -45,8 +45,8 @@ function UpdateProduct() {
                     </div>
                     
                       <textarea cols="30" rows="5" name='title'
-                            value={products.description}
-                            onChange={e => setProducts({ ...products, description: e.target.value })}
+                            value={singleProduct.description}
+                            onChange={e => setSingleProduct({ ...singleProduct, description: e.target.value })}
                             className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
                             placeholder='Product description'>
                        </textarea>

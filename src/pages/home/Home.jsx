@@ -17,7 +17,7 @@ function Home() {
         <ProductList limit={16}/>
       </SectionWrapper>
       <SectionWrapper sectionTitle='Cutomer reviews' allProductUrl='/reviews'>
-        <ProductReviewList/>
+        <ProductReviewList limit={8}/>
       </SectionWrapper>
 
       {/* <Track/> */}

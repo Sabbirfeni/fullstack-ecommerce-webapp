@@ -8,11 +8,14 @@ import './productList.css'
 import { toast } from 'react-toastify'
 import Filter from '../filter/Filter'
 import { animate, motion } from "framer-motion"
+import Loader from '../loader/Loader'
 
 function ProductList({ limit }) {
     const context = useContext(myContext)
-    const { mode, product, searchKey, filterType, filterPrice, } = context
+    const { mode, allProducts, searchKey, filterType, filterPrice, loading } = context
+    console.log(allProducts)
 
+    let productLimit = limit || allProducts.length
     const cartItem = useSelector(state => state.cart)
     const dispatch = useDispatch();
 
@@ -24,15 +27,20 @@ function ProductList({ limit }) {
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItem))
     }, [cartItem])
+
+    if(loading) {
+        return <Loader/>
+    }
+
     return (
         <div>
             <Filter/>
             <div className='product-list grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-cols-2 gap-2 md:gap-3'>
             
-            {product.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))
+            {allProducts.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))
                     .filter(item => item.catergory.toLowerCase().includes(filterType.toLowerCase()))
                     .filter(item => Number(item.price) <= Number(filterPrice) || Number(filterPrice) == 0)
-                    .slice(0, limit)
+                    .slice(0, productLimit)
                     .map((item, index, arr) => {
                         const { productId, title, price, description, imageUrl } = item;
                         

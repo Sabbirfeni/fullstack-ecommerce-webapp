@@ -15,8 +15,7 @@ import OrderForm from '../../components/Form/OrderForm';
 function Cart() {
   // cart
   const context = useContext(myContext)
-  const { mode, setOrders, getOrderData, setLoading } = context;
-
+  const { mode, getOrderData, setLoading } = context;
   const cartItem = useSelector(state => state.cart)
   const user = JSON.parse(localStorage.getItem('user')) 
   const dispatch = useDispatch()
@@ -86,7 +85,6 @@ function Cart() {
         await addDoc(docRef, orderData)
       })
       getOrderData()
-      
       toast.success('order completed!')
       localStorage.removeItem('cart')
       dispatch(resetCart())
