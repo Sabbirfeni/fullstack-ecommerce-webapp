@@ -7,7 +7,7 @@ import { product1, product2, product3 } from '../../assets/images'
 import './productList.css'
 import { toast } from 'react-toastify'
 import Filter from '../filter/Filter'
-import { animate, motion } from "framer-motion"
+import { animate, motion, useAnimate } from "framer-motion"
 import Loader from '../loader/Loader'
 
 function ProductList({ limit }) {
@@ -33,10 +33,10 @@ function ProductList({ limit }) {
     }
 
 
-
     return (
         <div>
             <Filter/>
+
             <div className='product-list grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-cols-2 gap-2 md:gap-3'>
             
             {allProducts.filter(item => item.title.toLowerCase().includes(searchKey.toLowerCase()))

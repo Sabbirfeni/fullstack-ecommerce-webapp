@@ -24,6 +24,7 @@ function ProductReviewList({ limit = null , productId = null}) {
             const { fullName, reviewText } = review
             return (
             <motion.div
+            layout
                 key={index}
                 initial={{ opacity: 0, }}
                 whileInView={{ opacity: 1 }}
