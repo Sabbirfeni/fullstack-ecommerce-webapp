@@ -109,12 +109,12 @@ function MyState(props) {
     }
   }
 
-  const deleteProduct = async item => {
+  const deleteProduct = async productId => {
     setLoading(true)
     try {
-      const docRef = doc(fireDB, 'singleProduct', item.allProductsId)
+      const docRef = doc(fireDB, 'products', productId)
       await deleteDoc(docRef)
-      toast.info('allProducts deleted.')
+      toast.info('product deleted.')
       getProductData()
       setLoading(false)
     } catch(err) {

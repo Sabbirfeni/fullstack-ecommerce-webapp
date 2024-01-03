@@ -1,12 +1,14 @@
 import React from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 export const PrivateRouteForUser = ({ children }) => {
+    const location = useLocation()
     const user = localStorage.getItem('user');
     if(user) {
         return children
     } else {
-        return <Navigate to='/login'/>
+
+        return <Navigate to='/login' state={{ from: location.pathname }} />
     }
 }
 
@@ -15,6 +17,7 @@ export const PrivateRouteForAdmin = ({ children }) => {
     if(admin?.user?.email === 'sabbirholybangla@gmail.com') {
         return children
     } else {
-        return <Navigate to='/login'/>
+        const path = location.pathname === '/dashboard' ? '/dashboard/overview' : location.pathname
+        return <Navigate to='/login' state={{ from: path }}/>
     }
 }

@@ -11,6 +11,8 @@ import DataTable from '../../../../components/table/DataTable';
 function Overview() {
     const context = useContext(MyContext)
     const { mode, allProducts, deleteProduct, editHandle, orders, users } = context
+    const activerOrderNum = orders.filter(item => item.orderStatus !== 'completed').length
+    const completedOrderNum = orders.filter(item => item.orderStatus === 'completed').length
     const totalOrders = []
     orders.map(order => {
         totalOrders.push(order)
@@ -19,25 +21,30 @@ function Overview() {
     <div className='flex flex-col md:gap-3 gap-2'>
         <div className="overview-cards-container flex md:flex-row flex-col md:gap-3 gap-2">
             <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
-                <div className='flex items-center justify-between lg:text-3xl text-2xl'>
-                    <h3>{users.length}</h3>
+                <div className='flex items-center justify-between text-xl'>
+                    <h3 >Total users</h3>
                     <div><HiOutlineUsers/></div>
                 </div>
-                <h3 className='text-xl'>Total users</h3>
+                <h3 className='text-2xl'>{users.length}</h3>
             </div>
             <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
-                <div className='flex items-center justify-between lg:text-3xl text-2xl'>
-                    <h3>{allProducts.length}</h3>
+                <div className='flex items-center justify-between text-xl'>
+                    <h3>Total products</h3>
                     <div><BsCartCheck/></div>
                 </div>
-                <h3 className='text-xl'>Total products</h3>
+                <h3 className='text-2xl'>{allProducts.length}</h3>
+                
             </div>
             <div className="overview-card bg-[#fff] flex flex-col flex-1 p-4 space-y-12 border rounded-md">
-                <div className='flex items-center justify-between lg:text-3xl text-2xl'>
-                    <h3>{totalOrders.length}</h3>
+                <div className='flex items-center justify-between text-xl'>
+                    <h3 >Active orders</h3>
                     <div><TbTruckDelivery/></div>
                 </div>
-                <h3 className='text-xl'>Total orders</h3>
+                <div className='flex items-center justify-between'>
+                    <h3 className='text-2xl'>{activerOrderNum}</h3>
+                    <p className='text-sm text-[#2ec467]'>completed: {completedOrderNum}</p>
+                </div>
+                
             </div>
         </div>
 
@@ -80,7 +87,7 @@ function Overview() {
                                     {index + 1}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <img className='w-16' src={imageUrl} alt="img" />
+                                        <img className='w-16 h-16 object-cover rounded-sm' src={imageUrl} alt="img" />
                                     </td>
                                     <td class="px-6 py-4">
                                     {title}

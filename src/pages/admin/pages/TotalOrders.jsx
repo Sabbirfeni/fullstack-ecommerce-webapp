@@ -77,7 +77,7 @@ function TotalOrders() {
                         {orderSerial}
                         </td>
                         <td className="p-3">
-                        <img className='w-16' src={imageUrl} alt="img" />
+                        <img className='w-16 h-16 object-cover rounded-sm' src={imageUrl} alt="img" />
                         </td>
                         <td className="p-3">
                         {title}

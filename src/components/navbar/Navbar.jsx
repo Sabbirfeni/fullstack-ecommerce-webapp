@@ -124,42 +124,51 @@ export default function Navbar() {
 
           {/* profile icon */}
           { user && (
-          <div className='cursor-pointer relative'>
-            <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
-              <AnimatePresence>
-               {profileMenuOpen && 
-               (<motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ x: [null, -100, 0], opacity: 1}  }
-                  transition={{ duration: 0.2 }}
-                  exit={{ x: 100, opacity: 0 }}
-                  variants={profileMenuVariant}
-                  className={`menu-container absolute -left-20 z-50 flex py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
+            <>
+              <motion.div layoutId='profileMenu'>
+                <Avatar onClick={handleProfileMenu} style={{ width: 32, height: 32 }} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU" />
+              </motion.div>
+              
+              <div className='absolute top-12 z-50'>
+                {profileMenuOpen && 
+                <motion.div layoutId='profileMenu'  className='cursor-pointer'>
+                    {/* <AnimatePresence> */}
+                    
+                    <div
+                        
+                        // transition={{ duration: 0.2 }}
+                        // exit={{ x: 100, opacity: 0 }}
+                        // variants={profileMenuVariant}
+                        className={`menu-container flex py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}>
 
-                  {/* dashboard item will show if user is admin */}
-                  {isAdmin && (
-                    <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
-                  )}
-                  
-                  
-                  <Link to='/order' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>My orders</Link>
+                        {/* dashboard item will show if user is admin */}
+                        {isAdmin && (
+                          <Link to='/dashboard/overview' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>Dashboard</Link>
+                        )}
+                        
+                        
+                        <Link to='/order' onClick={handleProfileMenu} className='hover:bg-gray-200 py-1.5 px-3'>My orders</Link>
 
-                  {/* Logout item */}
-                  
-                    <Link 
-                      onClick={() => {
-                        handleProfileMenu();
-                        logout()
-                      }} 
-                      className='hover:bg-gray-200 py-1.5 px-3'
-                    >
-                        Logout
-                    </Link>
-                
-                </motion.div>)}
-              </AnimatePresence>
+                        {/* Logout item */}
+                        
+                          <Link 
+                            onClick={() => {
+                              handleProfileMenu();
+                              logout()
+                            }} 
+                            className='hover:bg-gray-200 py-1.5 px-3'
+                          >
+                              Logout
+                          </Link>
+                      
+                      </div>
+                    {/* </AnimatePresence> */}
 
-          </div>
+                </motion.div>}
+              </div>
+
+            </>
+
           )}
 
           {/* mode icon */}

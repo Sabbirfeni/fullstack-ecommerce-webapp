@@ -66,7 +66,7 @@ function ProductList({ limit }) {
                                 </Link>
                                 <div className='flex items-center justify-between pr-2 md:pr-3 xl:pr-4 pl-2 md:pl-3 xl:pl-4 pb-2 md:pb-3 xl:pb-4 pt-0'>
                                     <h4 className='text-sm sm:text-md lg:text-lg font-bold'>$ {price}</h4>
-                                    <button onClick={() => addCart(item)} className='addto-card-btn bg-[#e2e8f0] hover:bg-[#000] transition hover:text-[#fff] px-3 py-2 text-xs rounded-sm z-40'>Add to cart</button>
+                                    <button onClick={() => addCart(item)} className='addto-card-btn bg-[#e2e8f0] hover:bg-[#000] transition hover:text-[#fff] px-2 py-1 text-xs rounded-sm z-40'>Add to cart</button>
                                 </div>
                             </motion.div>
                         )

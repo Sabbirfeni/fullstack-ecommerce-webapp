@@ -63,10 +63,11 @@ function AddProduct() {
                 </div>
                 
                   <textarea cols="30" rows="5" name='title'
+                        minLength='40'
                         value={singleProduct.description}
                         onChange={e => setSingleProduct({ ...singleProduct, description: e.target.value })}
                         className='border border-[#b8b8b8] px-3 py-2 rounded-md placeholder:text-[#d3d3d3] outline-none'
-                        placeholder='Product description'>
+                        placeholder='Product description' required>
                    </textarea>
 
                 <button
