@@ -1,90 +1,115 @@
-import { useContext, useState } from 'react'
-import './signup.css'
-import { Link } from 'react-router-dom'
-import MyContext from '../../context/data/myContext';
-import { toast } from 'react-toastify';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, fireDB } from '../../firebase/FirebaseConfig';
-import { Timestamp, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import MyContext from "../../context/data/myContext";
+import { auth, fireDB } from "../../firebase/FirebaseConfig";
+import "./signup.css";
 
 function Signup() {
-    const [ name, setName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const context = useContext(MyContext);
-    const [ loading, setLoading ] = useState(false);
+  const context = useContext(MyContext);
+  const [loading, setLoading] = useState(false);
 
-    const signup = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        if(name == '' || email == '' || password == '') {
-            return toast.error('All fields are required!');
-        }
-        
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email, password)
-            const user = {
-                name: name,
-                uid: response.user.uid,
-                email: response.user.email,
-                time: Timestamp.now()
-            }
-            const userRef = collection(fireDB, 'users');
-            await addDoc(userRef, user)
-            toast.success('Congrats! You are signed up.')
-            setName('');
-            setEmail('');
-            setPassword('')
-            setLoading(false)
-        } catch(err) {
-            console.log(err.message)
-            toast.error('Sign up failed!')
-            setLoading(false)
-        }
+  // Initial object for sign up form data
+  const signupData = {
+    name: "",
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("username required"),
+    email: Yup.string().email("enter vaild email").required("email required"),
+    password: Yup.string()
+      .min(8, "must be at least 8 character")
+      .required("password required"),
+  });
+
+  const signup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (name == "" || email == "" || password == "") {
+      return toast.error("All fields are required!");
     }
-   
-    return (
-        <div className='flex justify-center items-center h-screen'>
-            <div className="form-container flex flex-col justify-center items-center">
-                <p className="title">Create account</p>
-                <form className="sign-form my-4">
-                    <input 
-                        value={name} 
-                        onChange={e => setName(e.target.value)}
-                        name='name' 
-                        type="text" 
-                        className='border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none'
-                        placeholder="Name"
-                    />
-                    <input 
-                        value={email} 
-                        onChange={e => setEmail(e.target.value)}
-                        name='email'
-                        type="email"
-                        className='border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none'
-                        placeholder="Email"
-                    />
-                    <input 
-                        value={password} 
-                        onChange={e => setPassword(e.target.value)}
-                        name='password'  
-                        type="password" 
-                        className='border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none'
-                        placeholder="Password"
-                    />
-                    <button
-                        onClick={e => signup(e)}
-                        className={`${loading && 'bg-gray-500 pointer-events-none'} bg-[#000] text-[#fff] py-3 rounded-md`}
-                        disabled={loading}
-                    >
-                        {loading ? 'Loading...' : 'Create account'}
-                    </button>         
-                </form>
-                <p className="sign-up-label">
-                    Already have an account?<Link to='/login' className="sign-up-link">Log in</Link>
-                </p>
-                {/* <div class="buttons-container">
+
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = {
+        name: name,
+        uid: response.user.uid,
+        email: response.user.email,
+        time: Timestamp.now(),
+      };
+      const userRef = collection(fireDB, "users");
+      await addDoc(userRef, user);
+      toast.success("Congrats! You are signed up.");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+      toast.error("Sign up failed!");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="form-container flex flex-col justify-center items-center">
+        <p className="title">Create account</p>
+        <form className="sign-form my-4">
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            name="name"
+            type="text"
+            className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+            placeholder="Name"
+          />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            type="email"
+            className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+            placeholder="Email"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            type="password"
+            className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+            placeholder="Password"
+          />
+          <button
+            onClick={(e) => signup(e)}
+            className={`${
+              loading && "bg-gray-500 pointer-events-none"
+            } bg-[#000] text-[#fff] py-3 rounded-md`}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Create account"}
+          </button>
+        </form>
+        <p className="sign-up-label">
+          Already have an account?
+          <Link to="/login" className="sign-up-link">
+            Log in
+          </Link>
+        </p>
+        {/* <div class="buttons-container">
                     <div class="apple-login-button">
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="apple-icon" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z"></path>
@@ -106,9 +131,9 @@ function Signup() {
                         <span>Sign up with Google</span>
                     </div>
                 </div> */}
-            </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Signup
+export default Signup;

@@ -1,7 +1,11 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
+  rules: {
+    "no-unused-vars": 0
+  },
   extends: [
+    'prettier',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
