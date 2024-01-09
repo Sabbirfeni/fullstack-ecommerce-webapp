@@ -10,10 +10,11 @@ import "./signup.css";
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location);
   const redirectPath = location.state?.from ? location.state?.from : "/";
 
   const [loading, setLoading] = useState(false);
-
+  console.log(location);
   const loginData = {
     email: "",
     password: "",
@@ -24,15 +25,10 @@ function Login() {
     password: Yup.string().required("must enter password"),
   });
 
-  const onSubmit = (values) => {
+  const login = async (values) => {
     console.log(values);
     const { email, password } = values;
-    login(email, password);
-  };
-
-  const login = async (email, password) => {
     setLoading(true);
-
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       toast.success("Welcome, you're logged in");
@@ -53,7 +49,7 @@ function Login() {
         <Formik
           initialValues={loginData}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
+          onSubmit={login}
         >
           {(formik) => {
             const { isValid } = formik;

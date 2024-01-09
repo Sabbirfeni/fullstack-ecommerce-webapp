@@ -33,7 +33,7 @@ export default function Navbar() {
   const logout = () => {
     if (!confirm("Are you sure!")) return;
     localStorage.clear("user");
-    navigate("/login");
+    navigate("/");
   };
 
   const handleProfileMenu = () => {
