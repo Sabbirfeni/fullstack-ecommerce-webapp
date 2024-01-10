@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { HiBars3 } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
@@ -156,63 +156,71 @@ export default function Navbar() {
 
           {/* profile icon */}
           {user && (
-            <>
-              <motion.div layoutId="profileMenu" className="cursor-pointer">
-                <Avatar
-                  onClick={handleProfileMenu}
-                  style={{ width: 32, height: 32 }}
-                  alt="Remy Sharp"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU"
-                />
-              </motion.div>
+            <div className="relative">
+              <Avatar
+                onClick={handleProfileMenu}
+                style={{ width: 32, height: 32 }}
+                alt="Remy Sharp"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU"
+              />
 
-              <div className="absolute top-12 z-50">
-                {profileMenuOpen && (
-                  <motion.div layoutId="profileMenu" className="cursor-pointer">
-                    {/* <AnimatePresence> */}
-
-                    <div
-                      // transition={{ duration: 0.2 }}
-                      // exit={{ x: 100, opacity: 0 }}
-                      // variants={profileMenuVariant}
-                      className={`menu-container flex py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}
+              <div
+                className="absolute 
+               z-50"
+              >
+                <AnimatePresence>
+                  {profileMenuOpen && (
+                    <motion.div
+                      initial={{ x: -40, y: -70, scale: 0 }}
+                      animate={{ x: -90, y: 10, scale: 1 }}
+                      exit={{ x: -40, y: -70, scale: 0 }}
+                      className="cursor-pointer"
                     >
-                      {/* dashboard item will show if user is admin */}
-                      {isAdmin && (
+                      {/* <AnimatePresence> */}
+
+                      <div
+                        // transition={{ duration: 0.2 }}
+                        // exit={{ x: 100, opacity: 0 }}
+                        // variants={profileMenuVariant}
+                        className={`menu-container flex py-1.5 flex-col transition text-sm w-[120px] bg-[#ffffff] rounded-md shadow-xl`}
+                      >
+                        {/* dashboard item will show if user is admin */}
+                        {isAdmin && (
+                          <Link
+                            to="/dashboard/overview"
+                            onClick={handleProfileMenu}
+                            className="hover:bg-gray-200 py-1.5 px-3"
+                          >
+                            Dashboard
+                          </Link>
+                        )}
+
                         <Link
-                          to="/dashboard/overview"
+                          to="/order"
                           onClick={handleProfileMenu}
                           className="hover:bg-gray-200 py-1.5 px-3"
                         >
-                          Dashboard
+                          My orders
                         </Link>
-                      )}
 
-                      <Link
-                        to="/order"
-                        onClick={handleProfileMenu}
-                        className="hover:bg-gray-200 py-1.5 px-3"
-                      >
-                        My orders
-                      </Link>
+                        {/* Logout item */}
 
-                      {/* Logout item */}
-
-                      <Link
-                        onClick={() => {
-                          handleProfileMenu();
-                          logout();
-                        }}
-                        className="hover:bg-gray-200 py-1.5 px-3"
-                      >
-                        Logout
-                      </Link>
-                    </div>
-                    {/* </AnimatePresence> */}
-                  </motion.div>
-                )}
+                        <Link
+                          onClick={() => {
+                            handleProfileMenu();
+                            logout();
+                          }}
+                          className="hover:bg-gray-200 py-1.5 px-3"
+                        >
+                          Logout
+                        </Link>
+                      </div>
+                      {/* </AnimatePresence> */}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </>
+            </div>
           )}
 
           {/* mode icon */}

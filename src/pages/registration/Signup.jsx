@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -60,8 +61,6 @@ function Signup() {
     }
   };
 
-  const signup = async (e) => {};
-
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="form-container flex flex-col justify-center items-center">
@@ -72,8 +71,17 @@ function Signup() {
           onSubmit={signUp}
         >
           {(formik) => {
-            const { isValid } = formik;
-
+            const { isValid, errors } = formik;
+            const onClickAnimation = () => {
+              if (
+                Object.keys(errors).length === 0 &&
+                errors.constructor === Object
+              ) {
+                return { x: 0 };
+              } else {
+                return { x: [0, 10, -10, 10, -10, 10, -10, 0] };
+              }
+            };
             return (
               <Form className="sign-form my-4">
                 <Field
@@ -109,7 +117,9 @@ function Signup() {
                   className="text-[#ff8383]"
                   component="div"
                 />
-                <button
+                <motion.button
+                  initial={{ x: 0 }}
+                  animate={onClickAnimation}
                   // onClick={onSubmit}
                   type="submit"
                   className={`${
@@ -118,7 +128,7 @@ function Signup() {
                   disabled={!isValid || loading}
                 >
                   {loading ? "Loading..." : "Create account"}
-                </button>
+                </motion.button>
               </Form>
             );
           }}
