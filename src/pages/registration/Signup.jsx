@@ -35,8 +35,7 @@ function Signup() {
   });
 
   const signUp = async (values) => {
-    setLoading(true);
-    const { email, password } = values;
+    const { name, email, password } = values;
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
@@ -44,7 +43,7 @@ function Signup() {
         password
       );
       const user = {
-        name: name,
+        name,
         uid: response.user.uid,
         email: response.user.email,
         time: Timestamp.now(),
