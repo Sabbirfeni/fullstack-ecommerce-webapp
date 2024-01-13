@@ -113,7 +113,7 @@ function Cart() {
   const [totalAmount, setTotalAmount] = useState(0);
   let shipping = totalAmount == 0 ? 0 : 100;
   let groundTotal = shipping + totalAmount;
-
+  // sabbir
   useEffect(() => {
     let temp = 0;
     cartItem.forEach((item) => {
