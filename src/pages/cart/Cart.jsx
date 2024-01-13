@@ -8,6 +8,7 @@ import Modal from "../../components/modal/Modal";
 import myContext from "../../context/data/myContext";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import { deleteFromCart, resetCart } from "../../redux/cartSlice";
+import SectionWrapper from "../../wrapper/sectionWrapper/SectionWrapper";
 import "./cart.css";
 
 function Cart() {
@@ -128,7 +129,7 @@ function Cart() {
   }, []);
 
   return (
-    <>
+    <SectionWrapper sectionTitle="Cart">
       {cartItem.length > 0 ? (
         <div className="flex justify-between w-full flex-col lg:flex-row gap-2 md:gap-3">
           <div className="cart-item-container w-full lg:w-2/3 grid xl:grid-cols-2 grid-cols-1 gap-2 md:gap-3">
@@ -230,7 +231,7 @@ function Cart() {
       ) : (
         <div className="text-center">No cart</div>
       )}
-    </>
+    </SectionWrapper>
   );
 }
 
