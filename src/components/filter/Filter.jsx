@@ -28,6 +28,12 @@ function Filter() {
     <div className="">
       <div className="flex">
         <div className="filter-options flex-1 flex items-center gap-2 gap-md-5">
+          <button
+            onClick={resetFilters}
+            className="border-none text-[#000] text-xs px-2 md:px-3 rounded-sm"
+          >
+            Reset
+          </button>
           {/* <p className='border border-slate-300 text-[#000] text-xs md:text-sm px-2 md:px-5 py-3 md:py-2.5 rounded-sm'>Filters</p> */}
           <FormControl sx={{ width: { xs: "100px", md: "150px" } }}>
             <InputLabel
@@ -107,12 +113,6 @@ function Filter() {
               </MenuItem>
             </Select>
           </FormControl>
-          <button
-            onClick={resetFilters}
-            className="border-none text-[#000] text-xs px-2 md:px-3 rounded-sm"
-          >
-            Reset
-          </button>
         </div>
         {/* <div className='reset-filter flex-1 flex items-center justify-end'>
                    
