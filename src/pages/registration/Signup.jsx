@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { logo } from "../../assets/images";
 import MyContext from "../../context/data/myContext";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
 import "./signup.css";
@@ -63,6 +64,7 @@ function Signup() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="form-container flex flex-col justify-center items-center">
+        <img src={logo} alt="logo" className="w-16 h-16 mb-4" />
         <p className="title">Create account</p>
         <Formik
           initialValues={signupData}

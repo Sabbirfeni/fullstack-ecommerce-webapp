@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { logo } from "../../assets/images";
 import { auth } from "../../firebase/FirebaseConfig";
 import "./signup.css";
 
@@ -45,6 +46,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="form-container flex flex-col justify-center items-center">
+        <img src={logo} alt="logo" className="w-16 h-16 mb-4" />
         <p className="title">Login</p>
         <Formik
           initialValues={loginData}
