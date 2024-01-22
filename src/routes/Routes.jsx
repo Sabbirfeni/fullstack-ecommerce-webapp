@@ -12,6 +12,7 @@ import ProductInfo from "../pages/productInfo/ProductInfo";
 import Login from "../pages/registration/Login";
 import Signup from "../pages/registration/Signup";
 import AllReviews from "../pages/reviews/AllReviews";
+import PageTransitionWrapper from "../wrapper/pageTransitionWrapper/PageTransitionWrapper";
 import { PrivateRouteForAdmin, PrivateRouteForUser } from "./PrivateRoutes";
 
 const router = createBrowserRouter([
@@ -21,25 +22,43 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <PageTransitionWrapper>
+            <Home />
+          </PageTransitionWrapper>
+        ),
       },
       {
         path: "/allproducts",
-        element: <AllProducts />,
+        element: (
+          <PageTransitionWrapper>
+            <AllProducts />
+          </PageTransitionWrapper>
+        ),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <PageTransitionWrapper>
+            <Cart />
+          </PageTransitionWrapper>
+        ),
       },
       {
         path: "/reviews",
-        element: <AllReviews />,
+        element: (
+          <PageTransitionWrapper>
+            <AllReviews />
+          </PageTransitionWrapper>
+        ),
       },
       {
         path: "/order",
         element: (
           <PrivateRouteForUser>
-            <Order />
+            <PageTransitionWrapper>
+              <Order />
+            </PageTransitionWrapper>
           </PrivateRouteForUser>
         ),
       },
@@ -47,54 +66,96 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: (
           <PrivateRouteForAdmin>
-            <DashboardLayout />
+            <PageTransitionWrapper>
+              <DashboardLayout />
+            </PageTransitionWrapper>
           </PrivateRouteForAdmin>
         ),
         children: [
           {
             path: "overview",
-            element: <Overview />,
+            element: (
+              <PageTransitionWrapper>
+                <Overview />
+              </PageTransitionWrapper>
+            ),
           },
           {
             path: "all-products",
-            element: <TotalProducts />,
+            element: (
+              <PageTransitionWrapper>
+                <TotalProducts />
+              </PageTransitionWrapper>
+            ),
           },
           {
             path: "all-orders",
-            element: <TotalOrders />,
+            element: (
+              <PageTransitionWrapper>
+                <TotalOrders />
+              </PageTransitionWrapper>
+            ),
           },
           {
             path: "all-users",
-            element: <TotalUsers />,
+            element: (
+              <PageTransitionWrapper>
+                <TotalUsers />
+              </PageTransitionWrapper>
+            ),
           },
           {
             path: "updateproduct",
-            element: <UpdateProduct />,
+            element: (
+              <PageTransitionWrapper>
+                <UpdateProduct />
+              </PageTransitionWrapper>
+            ),
           },
           {
             path: "addproduct",
-            element: <AddProduct />,
+            element: (
+              <PageTransitionWrapper>
+                <AddProduct />
+              </PageTransitionWrapper>
+            ),
           },
         ],
       },
       {
         path: "/productinfo/:id",
-        element: <ProductInfo />,
+        element: (
+          <PageTransitionWrapper>
+            <ProductInfo />
+          </PageTransitionWrapper>
+        ),
       },
 
       {
         path: "/*",
-        element: <NoPage />,
+        element: (
+          <PageTransitionWrapper>
+            <NoPage />
+          </PageTransitionWrapper>
+        ),
       },
     ],
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PageTransitionWrapper>
+        <Login />
+      </PageTransitionWrapper>
+    ),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <PageTransitionWrapper>
+        <Signup />
+      </PageTransitionWrapper>
+    ),
   },
 ]);
 
