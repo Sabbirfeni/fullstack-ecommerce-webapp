@@ -1,21 +1,17 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { logo } from "../../assets/images";
+import ErrorContainer from "../../components/errorMessage/ErrorContainer";
 import MyContext from "../../context/data/myContext";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
-import "./signup.css";
+// import "./signup.css";
 
 function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const context = useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,16 +24,17 @@ function Signup() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("username required"),
-    email: Yup.string().email("enter vaild email").required("email required"),
+    name: Yup.string().required("Username required"),
+    email: Yup.string().email("Enter vaild email.").required("email required"),
     password: Yup.string()
-      .min(8, "must be at least 8 character")
-      .required("password required"),
+      .min(8, "Must be at least 8 character")
+      .required("Password required"),
   });
 
   const signUp = async (values) => {
     const { name, email, password } = values;
     try {
+      setLoading(true);
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -53,19 +50,19 @@ function Signup() {
       await addDoc(userRef, user);
       toast.success("Congrats! You are signed up.");
       setLoading(false);
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       console.log(err);
-      toast.error("Sign up failed!");
+      toast.error(err.message);
       setLoading(false);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="form-container flex flex-col justify-center items-center">
+      <div className="bg-[#ffffff] sm:w-96 w-full sm:relative absolute inset-0 p-8 rounded-sm flex flex-col justify-center items-center">
         <img src={logo} alt="logo" className="w-16 h-16 mb-4" />
-        <p className="title">Create account</p>
+        <p className="text-lg">Create account</p>
         <Formik
           initialValues={signupData}
           validationSchema={validationSchema}
@@ -85,84 +82,60 @@ function Signup() {
             };
             return (
               <Form className="sign-form my-4">
+                {/* Name field */}
                 <Field
                   name="name"
                   type="text"
-                  className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+                  className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Name"
+                  autocomplete="off"
                 />
-                <ErrorMessage
-                  name="name"
-                  className="text-[#ff8383]"
-                  component="div"
-                />
+                <ErrorMessage name="name" component={ErrorContainer} />
+
+                {/* Email field */}
                 <Field
                   name="email"
                   type="email"
-                  className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+                  className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Email"
+                  autocomplete="off"
                 />
-                <ErrorMessage
-                  name="email"
-                  className="text-[#ff8383]"
-                  component="div"
-                />
+                <ErrorMessage name="email" component={ErrorContainer} />
+
+                {/* Password field */}
                 <Field
                   name="password"
                   type="password"
-                  className="border border-[#b8b8b8] p-3 rounded-md placeholder:text-[#d3d3d3] outline-none"
+                  className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Password"
+                  autocomplete="off"
                 />
-                <ErrorMessage
-                  name="password"
-                  className="text-[#ff8383]"
-                  component="div"
-                />
-                <motion.button
-                  initial={{ x: 0 }}
-                  animate={onClickAnimation}
-                  // onClick={onSubmit}
+                <ErrorMessage name="password" component={ErrorContainer} />
+
+                {/* Form submit button */}
+                <button
                   type="submit"
                   className={`${
-                    loading || !isValid ? "bg-gray-500 pointer-events-none" : ""
-                  } bg-[#000] text-[#fff] py-3 rounded-md`}
+                    loading || !isValid ? "cursor-no-drop" : ""
+                  } bg-[#000] text-[#fff] py-3 rounded-sm`}
                   disabled={!isValid || loading}
                 >
-                  {loading ? "Loading..." : "Create account"}
-                </motion.button>
+                  {loading ? "Creating..." : "Create"}
+                </button>
               </Form>
             );
           }}
         </Formik>
 
-        <p className="sign-up-label">
-          Already have an account?
-          <Link to="/login" className="sign-up-link">
+        {/* Section for redirect to login form */}
+        <div>
+          <span className="text-xs text-[#bbbbbb]">
+            Already have an account?
+          </span>
+          <Link to="/login" className="text-xs ml-1 hover:underline">
             Log in
           </Link>
-        </p>
-        {/* <div class="buttons-container">
-                          <div class="apple-login-button">
-                              <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="apple-icon" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z"></path>
-                              </svg>
-                              <span>Sign up with Apple</span>
-                          </div>
-                          <div class="google-login-button">
-                              <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" x="0px" y="0px" class="google-icon" viewBox="0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                              <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
-                                  c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
-                                  c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
-                                          <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657
-                                  C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
-                                          <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36
-                                  c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
-                                          <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
-                                  c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
-                              </svg>
-                              <span>Sign up with Google</span>
-                          </div>
-                      </div> */}
+        </div>
       </div>
     </div>
   );
