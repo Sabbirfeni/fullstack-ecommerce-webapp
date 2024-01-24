@@ -1,22 +1,18 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { logo } from "../../assets/images";
 import ErrorContainer from "../../components/errorMessage/ErrorContainer";
-import MyContext from "../../context/data/myContext";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
-// import "./signup.css";
 
 function Signup() {
-  const context = useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Initial object for sign up form data
   const signupData = {
     name: "",
     email: "",
@@ -24,11 +20,11 @@ function Signup() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Username required"),
-    email: Yup.string().email("Enter vaild email.").required("email required"),
+    name: Yup.string().required("Username required."),
+    email: Yup.string().email("Enter vaild email.").required("Email required."),
     password: Yup.string()
-      .min(8, "Must be at least 8 character")
-      .required("Password required"),
+      .min(8, "Must be at least 8 character.")
+      .required("Password required."),
   });
 
   const signUp = async (values) => {
@@ -48,9 +44,10 @@ function Signup() {
       };
       const userRef = collection(fireDB, "users");
       await addDoc(userRef, user);
-      toast.success("Congrats! You are signed up.");
-      setLoading(false);
+      await localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
+      setLoading(false);
+      toast.success("Congrats! You are signed up.");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -88,7 +85,7 @@ function Signup() {
                   type="text"
                   className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Name"
-                  autocomplete="off"
+                  autoComplete="off"
                 />
                 <ErrorMessage name="name" component={ErrorContainer} />
 
@@ -98,7 +95,7 @@ function Signup() {
                   type="email"
                   className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Email"
-                  autocomplete="off"
+                  autoComplete="off"
                 />
                 <ErrorMessage name="email" component={ErrorContainer} />
 
@@ -108,7 +105,7 @@ function Signup() {
                   type="password"
                   className="border bg-[#ececec] border-none p-3 rounded-sm placeholder:text-[#bbbbbb] outline-none"
                   placeholder="Password"
-                  autocomplete="off"
+                  autoComplete="off"
                 />
                 <ErrorMessage name="password" component={ErrorContainer} />
 

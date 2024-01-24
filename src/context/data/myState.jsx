@@ -11,6 +11,7 @@ import {
   query,
   setDoc,
 } from "firebase/firestore";
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -189,6 +190,7 @@ function MyState(props) {
   const [searchKey, setSearchKey] = useState("");
   const [filterType, setFilterType] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
+  const [routePath, setRoutePath] = useState("/");
 
   useEffect(() => {
     getProductData();
@@ -231,6 +233,8 @@ function MyState(props) {
     setSearchKey,
     setFilterType,
     setFilterPrice,
+    routePath,
+    setRoutePath,
   };
 
   return (

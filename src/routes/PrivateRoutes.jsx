@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import MyContext from "../context/data/myContext";
 
 export const PrivateRouteForUser = ({ children }) => {
+  const { setRoutePath } = useContext(MyContext);
   const location = useLocation();
   const user = localStorage.getItem("user");
   if (user) {
     return children;
   } else {
     const path = location.pathname;
+    setRoutePath(path);
     return <Navigate to="/login" state={{ from: path }} />;
   }
 };

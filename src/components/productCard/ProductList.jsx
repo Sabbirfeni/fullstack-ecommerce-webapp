@@ -12,7 +12,6 @@ function ProductList({ limit }) {
   const context = useContext(myContext);
   const { mode, allProducts, searchKey, filterType, filterPrice, loading } =
     context;
-  console.log(allProducts);
 
   let productLimit = limit || allProducts.length;
   const cartItem = useSelector((state) => state.cart);
