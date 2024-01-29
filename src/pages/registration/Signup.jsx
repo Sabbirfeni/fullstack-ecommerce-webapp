@@ -58,7 +58,9 @@ function Signup() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-[#ffffff] sm:w-96 w-full sm:relative absolute inset-0 p-8 rounded-sm flex flex-col justify-center items-center">
-        <img src={logo} alt="logo" className="w-16 h-16 mb-4" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="w-16 h-16 mb-4" />
+        </Link>
         <p className="text-lg">Create account</p>
         <Formik
           initialValues={signupData}

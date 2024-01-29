@@ -53,7 +53,7 @@ function ProductList({ limit }) {
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.2 }}
                 key={productId}
                 className="bg-[#fff] rounded-md product-card-container"
               >
